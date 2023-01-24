@@ -13,7 +13,7 @@
 
 |   #   | File             | Description                                        |
 | :---: | ---------------  | -------------------------------------------------- |
-|   1   | Main.cpp(https://github.com/Jarette/3013--Algorithms--Greene/blob/main/Assignment/A03/main.cpp)| Main driver of my project that launches game.      |
+|   1   | [Main.cpp](https://github.com/Jarette/3013--Algorithms--Greene/blob/main/Assignment/A03/main.cpp)| Main driver of my project that launches game.      |
 
 
 ### Instructions
@@ -25,10 +25,6 @@
 - Example Command:
 
     CircularArrayQue C1(5);   // created instance of queue
-    
     C1.Push(1);     // pushing items onto queue
-
-    
     cout << C1 << endl;    // displaying items in queue
-
     C1.Pop();    // removes item from list
