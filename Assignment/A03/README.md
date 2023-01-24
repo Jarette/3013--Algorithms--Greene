@@ -24,7 +24,7 @@
 
 - Example Command:
 
-        CircularArrayQue C1(5)
+        CircularArrayQue C1(5)  // created instance of queue
         C1.Push(1);     // pushing items onto queue
         cout << C1 << endl;    // displaying items in queue
         C1.Pop();    // removes item from list
