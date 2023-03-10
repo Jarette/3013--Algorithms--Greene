@@ -41,8 +41,8 @@ using namespace std;
  *      struct used to keep all data recieved from the json file together
  * 
  * Public Methods:
- *            jsondata()
- *    void    display();
+ *            jsondata()   //constructor
+ *    void    display();   // displays data in the struct
  * 
  * Private Methods:
  *    
@@ -164,7 +164,7 @@ void display(){
  *      Node used to store the values within the tree;
  * 
  * Public Methods:
- *            Node()
+ *            Node()  //constructor
  * 
  * Private Methods:
  *    
@@ -224,26 +224,27 @@ struct Node {
  *      as the main key used to search, sort and delete data
  * 
  * Public Methods:
- *           IDBST()
- *   void    insert(jsondata data)
- *   void    print() 
- *   Node*   remove(int data)
- *   int     height() 
- *   bool    founddata(int data)
- *   int     getnodeschecked()
+ *           IDBST()                
+ *   void    insert(jsondata data)  
+ *   void    print()                 
+ *   Node*   remove(int data)        
+ *   int     height()                 
+ *   bool    founddata(int data)    
+ *   int     getnodeschecked()    
  * 
  * Private Methods:
- *   void      print(Node *root)
- *   void      insert(json data, Node *&root)
- *   Node      *findmin(Node*root)
- *   Node      *remove(int data, Noderoot)
- *   int       height()
- *   jsondata  findnode(int id, Node*root)
- *   bool      founddata(string data, Node*root)
+ *   void      print(Node *root)      
+ *   void      insert(json data, Node *&root)   
+ *   Node      *findmin(Node*root)              
+ *   Node      *remove(int data, Noderoot)      
+ *   int       height()                        
+ *   jsondata  findnode(int id, Node*root)     
+ *   bool      founddata(string data, Node*root) 
+ *        
  * 
  * Usage: 
  * 
- *      IDBST List1;   //creatin a tree
+ *      IDBST List1;   //creating a tree
  *      List1.insert(data)  //inserting data into tree
  *      List1.founddata(1)  //located where the the ID #1 is located in the tree 
  *      List1.getnodeschecked()  //gives the amount of noodes that needed to be checked to find
@@ -253,33 +254,84 @@ struct Node {
 class IDBST {
 private:
   Node *root;         // the root/head of the tree
-  int nodeschecked;   
+  int nodeschecked;   // the nodes checked to find a specfic piece of data 
+
+   /**
+     * Private : print
+     * 
+     * Description:
+     *      used to print the data stored in the tree 
+     * 
+     * Params:
+     *      Node   *root   //root of the tree 
+     * 
+     * Returns:
+     *     N/A
+     */
   void print(Node *root) {
     if (!root) {
       return;
     }
     print(root->left);
-    root->data.display();
+    root->data.display();  // inorder traversal
     print(root->right);
   }
+  /**
+     * Private : insert
+     * 
+     * Description:
+     *      puts data into the tree 
+     * 
+     * Params:
+     *      Node      *root   //root of the tree 
+     *      jsondata  data    // data to be inserted 
+     * 
+     * Returns:
+     *     N/A
+     */
   void insert(jsondata data, Node *&root) {
     if (!root) {
       root = new Node(data);
       return;
     }
-    if (data.id < root->data.id) {
-      insert(data, root->left);
+    if (data.id < root->data.id) {  //trverses left if the data is smaller than node data
+      insert(data, root->left);     // right if the data is greater than node data
     } else {
       insert(data, root->right);
     }
   }
+  /**
+     * Private : findmin
+     * 
+     * Description:
+     *     finds the smallest node in a tree
+     * 
+     * Params:
+     *      Node   *root   //root of the tree 
+     * 
+     * Returns:
+     *     Node*   : pointer to a node 
+     */
   Node *findmin(Node *root) {
     Node *temp = root;
-    while (temp->left != nullptr) {
+    while (temp->left != nullptr) { //traverseing left until it gets to last node
       temp = temp->left;
     }
-    return temp;
+    return temp;    //returning the node with the smallest data 
   }
+  /**
+     * Private : removes
+     * 
+     * Description:
+     *     removes node from tree that contains specfied data 
+     * 
+     * Params:
+     *      Node   *root   //root of the tree 
+     *      int     data   // the data being looked for 
+     * 
+     * Returns:
+     *     Node*   : pointer to a node 
+     */
   Node *remove(int data, Node *root) {
     if (root == nullptr) {
       return nullptr;
@@ -308,12 +360,37 @@ private:
     }
     return root;
   }
+/**
+* Private : height
+* 
+* Description:
+*    finds the height of the tree 
+* 
+* Params:
+*      Node   *root   //root of the tree 
+* 
+* Returns:
+*     int   : the height of the tree
+*/
   int height(Node *root) {
     if (!root) {
       return 0;
     }
     return 1 + max(height(root->left), height(root->right));
   }
+ /**
+* Private : findnode
+* 
+* Description:
+*   used to find a node and get the data from it 
+* 
+* Params:
+*      Node   *root   //root of the tree 
+*     int     data  //the data being searched for 
+* 
+* Returns:
+*     jsondata   : the stored in the found node 
+*/
   jsondata findnode(int id, Node*root){
     jsondata temp;
     if(!root){
@@ -328,6 +405,19 @@ private:
       return findnode(id,root->right);
     }
   }
+  /**
+* Private : founddata
+* 
+* Description:
+*   finds the node containing data specifed and count the 
+*   of nodes that was needed to checked to find it 
+* 
+* Params:
+*      Node   *root   //root of the tree 
+* 
+* Returns:
+*     int   : the height of the tree
+*/
   bool founddata(int id, Node*root){
     nodeschecked++;
     if(!root){
@@ -347,19 +437,149 @@ private:
   }
 
 public:
+  /**
+* Public : IDBST
+* 
+* Description:
+*   Defaut Constructor
+* 
+* Params:
+*     N/A
+* 
+* Returns:
+*    N/A
+*/
   IDBST() { root = nullptr; }
+  /**
+* Public : insert
+* 
+* Description:
+*   calls private insert
+* 
+* Params:
+*     jsondata    data // the data to be added
+* 
+* Returns:
+*    N/A
+*/
   void insert(jsondata data) { insert(data, root); }
+/**
+* Public : print
+* 
+* Description:
+*   calls private print
+* 
+* Params:
+*    N/A
+* 
+* Returns:
+*    N/A
+*/
   void print() { print(root); }
+  /**
+* Public : remove
+* 
+* Description:
+*   calls private remove
+* 
+* Params:
+*    int      data  // data to b searched for 
+* 
+* Returns:
+*    Node* :  Node to be removed
+*/
   Node *remove(int data) { return remove(data, root); }
+  /**
+* Public : height
+* 
+* Description:
+*   calls private height
+* 
+* Params:
+*    N/A
+* 
+* Returns:
+*    int    :  height of tree
+*/
   int height() { return height(root); }
+  /**
+* Public : founddata
+* 
+* Description:
+*   calls private founddata
+* 
+* Params:
+*    int    data  //data being searched for 
+* 
+* Returns:
+*    bool    :  true or false based on if data is found
+*/
   bool founddata(int data){nodeschecked = 0; return founddata(data,root);}
+  /**
+* Public : getnodeschecked
+* 
+* Description:
+*   gets the number of nodes needed to be checked to find data
+* 
+* Params:
+*    N/A
+* 
+* Returns:
+*    int     : the number of nodes cecked
+*/
   int getnodeschecked(){return nodeschecked;}
 };
-
+/**
+ * FNBST
+ * 
+ * Description:
+ *      A binary search tree that uses the First Name field of the data
+ *      as the main key used to search, sort and delete data
+ * 
+ * Public Methods:
+ *           FNBST()                
+ *   void    insert(jsondata data)  
+ *   void    print()                 
+ *   Node*   remove(string data)        
+ *   int     height()                 
+ *   bool    founddata(string data)    
+ *   int     getnodeschecked()    
+ * 
+ * Private Methods:
+ *   void      print(Node *root)      
+ *   void      insert(json data, Node *&root)   
+ *   Node      *findmin(Node*root)              
+ *   Node      *remove(string data, Noderoot)      
+ *   int       height()                        
+ *   jsondata  findnode(string data, Node*root)     
+ *   bool      founddata(string data, Node*root) 
+ *        
+ * 
+ * Usage: 
+ * 
+ *      FNBST List1;   //creating a tree
+ *      List1.insert(data)  //inserting data into tree
+ *      List1.founddata("Jane")  //located where the the first name Jane is located in the tree 
+ *      List1.getnodeschecked()  //gives the amount of noodes that needed to be checked to find
+ *                               // data
+ *      
+ */
 class FNBST{
 private:
-Node*root;
-int nodeschecked;
+Node*root;    //root of tree
+int nodeschecked;  // the number of nodes checked to find data
+/**
+     * Private : print
+     * 
+     * Description:
+     *      used to print the data stored in the tree 
+     * 
+     * Params:
+     *      Node   *root   //root of the tree 
+     * 
+     * Returns:
+     *     N/A
+     */
 void print(Node*root){
   if(!root){
     return;
@@ -369,6 +589,19 @@ void print(Node*root){
   print(root -> right);
   
 }
+ /**
+* Private : insert
+* 
+* Description:
+*      puts data into the tree 
+* 
+* Params:
+*      Node      *root   //root of the tree 
+*      jsondata  data    // data to be inserted 
+* 
+* Returns:
+*     N/A
+*/
 void insert(jsondata data, Node*&root){
  
   if(!root){
@@ -381,6 +614,18 @@ void insert(jsondata data, Node*&root){
     insert(data,root->right);
   }
 }
+/**
+* Private : findmin
+* 
+* Description:
+*     finds the smallest node in a tree
+* 
+* Params:
+*      Node   *root   //root of the tree 
+* 
+* Returns:
+*     Node*   : pointer to a node 
+*/
 Node* findmin(Node*root){
   Node*temp=root;
   while(temp->left!=nullptr){
@@ -388,6 +633,19 @@ Node* findmin(Node*root){
   }
   return temp;
 }
+/**
+* Private : removes
+* 
+* Description:
+*     removes node from tree that contains specfied data 
+* 
+* Params:
+*      Node   *root   //root of the tree 
+*      string    data   // the data being looked for 
+* 
+* Returns:
+*     Node*   : pointer to a node 
+*/
 Node *remove(string data, Node *root){
   int index=0;
   if(root == nullptr){
@@ -422,12 +680,37 @@ Node *remove(string data, Node *root){
   }
   return root;
 }
+/**
+* Private : height
+* 
+* Description:
+*    finds the height of the tree 
+* 
+* Params:
+*      Node   *root   //root of the tree 
+* 
+* Returns:
+*     int   : the height of the tree
+*/
 int height(Node*root){
   if(!root){
     return 0;
   }
   return 1+max(height(root->left),height(root->right));
 }
+/**
+* Private : findnode
+* 
+* Description:
+*   used to find a node and get the data from it 
+* 
+* Params:
+*      Node   *root   //root of the tree 
+*     string    data  //the data being searched for 
+* 
+* Returns:
+*     jsondata   : the stored in the found node 
+*/
 jsondata findnode(string data,Node*root){
   jsondata temp;
   if(!root){
@@ -443,24 +726,19 @@ jsondata findnode(string data,Node*root){
     return findnode(data,root->right);
   }
 }
-int findnodecount(string data,Node*root){
-  jsondata temp;
-  int nodeschecked = 1;
-  if(!root){
-    return nodeschecked;
-  }
-  if(root->data.fname == data){
-    return nodeschecked;
-  }
-  else if(data<root->data.fname){
-    nodeschecked++;
-    return findnodecount(data,root->left);
-  }
-  else{
-    nodeschecked++;
-    return findnodecount(data,root->right);
-  }
-}
+  /**
+* Private : founddata
+* 
+* Description:
+*   finds the node containing data specifed and count the 
+*   of nodes that was needed to checked to find it 
+* 
+* Params:
+*      Node   *root   //root of the tree 
+* 
+* Returns:
+*     int   : the height of the tree
+*/
 bool founddata(string data, Node*root){
     nodeschecked++;
     if(!root){
@@ -479,19 +757,149 @@ bool founddata(string data, Node*root){
     }
   }
 public:
+  /**
+* Public : FNBST
+* 
+* Description:
+*   Defaut Constructor
+* 
+* Params:
+*     N/A
+* 
+* Returns:
+*    N/A
+*/
 FNBST(){root = nullptr;}
+ /**
+* Public : insert
+* 
+* Description:
+*   calls private insert
+* 
+* Params:
+*     jsondata    data // the data to be added
+* 
+* Returns:
+*    N/A
+*/
 void insert(jsondata data){insert(data,root);}
+/**
+* Public : print
+* 
+* Description:
+*   calls private print
+* 
+* Params:
+*    N/A
+* 
+* Returns:
+*    N/A
+*/
 void print(){print(root);}
+/**
+* Public : remove
+* 
+* Description:
+*   calls private remove
+* 
+* Params:
+*    string      data  // data to be searched for 
+* 
+* Returns:
+*    Node* :  Node to be removed
+*/
 Node *remove(string data){return remove(data,root);}
+ /**
+* Public : height
+* 
+* Description:
+*   calls private height
+* 
+* Params:
+*    N/A
+* 
+* Returns:
+*    int    :  height of tree
+*/
 int height(){return height(root);}
+ /**
+* Public : founddata
+* 
+* Description:
+*   calls private founddata
+* 
+* Params:
+*    string   data  //data being searched for 
+* 
+* Returns:
+*    bool    :  true or false based on if data is found
+*/
 bool founddata(string data){nodeschecked = 0; return founddata(data,root);}
+/**
+* Public : getnodeschecked
+* 
+* Description:
+*   gets the number of nodes needed to be checked to find data
+* 
+* Params:
+*    N/A
+* 
+* Returns:
+*    int     : the number of nodes cecked
+*/
 int getnodeschecked(){return nodeschecked;}
 };
-
+/**
+ * FNBST
+ * 
+ * Description:
+ *      A binary search tree that uses the last Name field of the data
+ *      as the main key used to search, sort and delete data
+ * 
+ * Public Methods:
+ *           LNBST()                
+ *   void    insert(jsondata data)  
+ *   void    print()                 
+ *   Node*   remove(string data)        
+ *   int     height()                 
+ *   bool    founddata(string data)    
+ *   int     getnodeschecked()    
+ * 
+ * Private Methods:
+ *   void      print(Node *root)      
+ *   void      insert(json data, Node *&root)   
+ *   Node      *findmin(Node*root)              
+ *   Node      *remove(string data, Noderoot)      
+ *   int       height()                        
+ *   jsondata  findnode(string data, Node*root)     
+ *   bool      founddata(string data, Node*root) 
+ *        
+ * 
+ * Usage: 
+ * 
+ *      FNBST List1;   //creating a tree
+ *      List1.insert(data)  //inserting data into tree
+ *      List1.founddata("jones")  //located where the the last name Jane is located in the tree 
+ *      List1.getnodeschecked()  //gives the amount of noodes that needed to be checked to find
+ *                               // data
+ *      
+ */
 class LNBST{
 private:
-Node*root;
-int nodeschecked;
+Node*root;        // root of tree
+int nodeschecked;  // holds the number of nodes checked to find data
+/**
+     * Private : print
+     * 
+     * Description:
+     *      used to print the data stored in the tree 
+     * 
+     * Params:
+     *      Node   *root   //root of the tree 
+     * 
+     * Returns:
+     *     N/A
+     */
 void print(Node*root){
   if(!root){
     return;
@@ -501,6 +909,19 @@ void print(Node*root){
   print(root -> right);
   
 }
+ /**
+* Private : insert
+* 
+* Description:
+*      puts data into the tree 
+* 
+* Params:
+*      Node      *root   //root of the tree 
+*      jsondata  data    // data to be inserted 
+* 
+* Returns:
+*     N/A
+*/
 void insert(jsondata data, Node*&root){
  
   if(!root){
@@ -513,6 +934,18 @@ void insert(jsondata data, Node*&root){
     insert(data,root->right);
   }
 }
+/**
+* Private : findmin
+* 
+* Description:
+*     finds the smallest node in a tree
+* 
+* Params:
+*      Node   *root   //root of the tree 
+* 
+* Returns:
+*     Node*   : pointer to a node 
+*/
 Node* findmin(Node*root){
   Node*temp=root;
   while(temp->left!=nullptr){
@@ -520,6 +953,19 @@ Node* findmin(Node*root){
   }
   return temp;
 }
+/**
+* Private : removes
+* 
+* Description:
+*     removes node from tree that contains specfied data 
+* 
+* Params:
+*      Node   *root   //root of the tree 
+*      string    data   // the data being looked for 
+* 
+* Returns:
+*     Node*   : pointer to a node 
+*/
 Node *remove(string data, Node *root){
   int index=0;
   if(root == nullptr){
@@ -554,12 +1000,37 @@ Node *remove(string data, Node *root){
   }
   return root;
 }
+/**
+* Private : height
+* 
+* Description:
+*    finds the height of the tree 
+* 
+* Params:
+*      Node   *root   //root of the tree 
+* 
+* Returns:
+*     int   : the height of the tree
+*/
 int height(Node*root){
   if(!root){
     return 0;
   }
   return 1+max(height(root->left),height(root->right));
 }
+/**
+* Private : findnode
+* 
+* Description:
+*   used to find a node and get the data from it 
+* 
+* Params:
+*      Node   *root   //root of the tree 
+*     string    data  //the data being searched for 
+* 
+* Returns:
+*     jsondata   : the stored in the found node 
+*/
 jsondata findnode(string data,Node*root){
   jsondata temp;
   if(!root){
@@ -575,24 +1046,19 @@ jsondata findnode(string data,Node*root){
     return findnode(data,root->right);
   }
 }
-int findnodecount(string data,Node*root){
-  jsondata temp;
-  int nodeschecked = 1;
-  if(!root){
-    return nodeschecked;
-  }
-  if(root->data.lname == data){
-    return nodeschecked;
-  }
-  else if(data<root->data.lname){
-    nodeschecked++;
-    return findnodecount(data,root->left);
-  }
-  else{
-    nodeschecked++;
-    return findnodecount(data,root->right);
-  }
-}
+/**
+* Private : founddata
+* 
+* Description:
+*   finds the node containing data specifed and count the 
+*   of nodes that was needed to checked to find it 
+* 
+* Params:
+*      Node   *root   //root of the tree 
+* 
+* Returns:
+*     int   : the height of the tree
+*/
 bool founddata(string data, Node*root){
     nodeschecked++;
     if(!root){
@@ -611,12 +1077,96 @@ bool founddata(string data, Node*root){
     }
   }
 public:
+ /**
+* Public : LNBST
+* 
+* Description:
+*   Defaut Constructor
+* 
+* Params:
+*     N/A
+* 
+* Returns:
+*    N/A
+*/
 LNBST(){root = nullptr;}
+/**
+* Public : insert
+* 
+* Description:
+*   calls private insert
+* 
+* Params:
+*     jsondata    data // the data to be added
+* 
+* Returns:
+*    N/A
+*/
 void insert(jsondata data){insert(data,root);}
+/**
+* Public : print
+* 
+* Description:
+*   calls private print
+* 
+* Params:
+*    N/A
+* 
+* Returns:
+*    N/A
+*/
 void print(){print(root);}
+/**
+* Public : remove
+* 
+* Description:
+*   calls private remove
+* 
+* Params:
+*    string      data  // data to be searched for 
+* 
+* Returns:
+*    Node* :  Node to be removed
+*/
 Node *remove(string data){return remove(data,root);}
+/**
+* Public : height
+* 
+* Description:
+*   calls private height
+* 
+* Params:
+*    N/A
+* 
+* Returns:
+*    int    :  height of tree
+*/
 int height(){return height(root);}
+/**
+* Public : founddata
+* 
+* Description:
+*   calls private founddata
+* 
+* Params:
+*    string   data  //data being searched for 
+* 
+* Returns:
+*    bool    :  true or false based on if data is found
+*/
 bool founddata(string data){nodeschecked = 0; return founddata(data,root);}
+/**
+* Public : getnodeschecked
+* 
+* Description:
+*   gets the number of nodes needed to be checked to find data
+* 
+* Params:
+*    N/A
+* 
+* Returns:
+*    int     : the number of nodes cecked
+*/
 int getnodeschecked(){return nodeschecked;}
 };
 
