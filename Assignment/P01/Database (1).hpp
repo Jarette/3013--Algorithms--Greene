@@ -1,3 +1,32 @@
+/*****************************************************************************
+*                    
+*  Author:           Jarette Greene
+*  Email:            jkgreene0406@my.msutexas.edu / jarettegreene09@gmail.com
+*  Label:            P01
+*  Title:            Database Indexes... What?!? (not really)
+*  Course:           CMPS 3013
+*  Semester:         Spring 2023
+* 
+*  Description:
+*        This header file contains the Binary Search trees used to create a the 
+*        the database used in the main.cpp file. The Binary search trees in this 
+*        program all accepts data from a Json file stored in a vector of structs. This file
+*        contains 9 binary search trees with each searching using a different key
+*        (ID, First Name, Last Name, Email, Phone, Address, Longitude, Latitude and 
+*         Car Model). Then places all these trees as attributes in a Database where 
+*         the user can access the tree based on what what type of data they would 
+*         like to search by
+* 
+*  Usage:
+*       - create instance of database
+*       - pass in vector of data into constructor
+*       - Use Found function to see if data is stored within database
+*       - and GetNodes to check how much nodes were checked before finding the data.
+* 
+*  Files:           
+*        Database.hpp     :        database header file
+*****************************************************************************/
+// neccesary Libraries
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -5,7 +34,28 @@
 #include <algorithm>
 using namespace std;
 
+/**
+ * jsondata
+ * 
+ * Description:
+ *      struct used to keep all data recieved from the json file together
+ * 
+ * Public Methods:
+ *            jsondata()
+ *    void    display();
+ * 
+ * Private Methods:
+ *    
+ *       N/A
+ * 
+ * Usage: 
+ * 
+ *     Node(jsondata d)  //passes jsondata into a node
+ *     data.display();   //displays all data stored in the struct
+ *      
+ */
 struct jsondata {
+  // all fields collected from JSON file
   int id;
   string fname;
   string lname;
@@ -23,7 +73,18 @@ struct jsondata {
   string jobtitle;
   string favoritemovie;
   vector <string> stocks;
-
+/**
+ * Public: jsondata
+ * 
+ * Description:
+ *     Default Constructor
+ * 
+ * Params:
+ *      N/A
+ * 
+ * Returns:
+ *      N/A
+*/
 jsondata(){
   id = -1;
   longitude = -1;
@@ -41,6 +102,18 @@ jsondata(){
   pet = "Null";
   jobtitle = "Null";
 }
+/**
+ * Public: display
+ * 
+ * Description:
+ *     used to display all data stored in the struct to the screen 
+ * 
+ * Params:
+ *      N/A
+ * 
+ * Returns:
+ *      N/A
+*/
 void display(){
   cout << "ID#: " << id;
     cout << endl;
@@ -84,12 +157,45 @@ void display(){
     cout << endl;
 }
 };
+/**
+ * Node
+ * 
+ * Description:
+ *      Node used to store the values within the tree;
+ * 
+ * Public Methods:
+ *            Node()
+ * 
+ * Private Methods:
+ *    
+ *       N/A
+ * 
+ * Usage: 
+ * 
+ *     Node *temp = new Node(d) //creates and initilizes a new node 
+ *      
+ */
 struct Node {
   jsondata data;
   Node *left;
   Node *right;
+  /**
+ * Public: Node
+ * 
+ * Description:
+ *     Constructor that recieved a struct 
+ * 
+ * Params:
+ *      jsondata d
+ * 
+ * Returns:
+ *      N/A
+*/
   Node(jsondata d) {
-    left = right = nullptr;
+  
+    left = right = nullptr; // initilizing the left right pointers 
+
+    // initilizing the rest of the data to the data passed in 
     data.id = d.id;
     data.fname = d.fname;
     data.lname = d.lname;
@@ -110,10 +216,44 @@ struct Node {
     }
   }
 };
+/**
+ * IDBST
+ * 
+ * Description:
+ *      A binary search tree that uses the ID field of the data
+ *      as the main key used to search, sort and delete data
+ * 
+ * Public Methods:
+ *           IDBST()
+ *   void    insert(jsondata data)
+ *   void    print() 
+ *   Node*   remove(int data)
+ *   int     height() 
+ *   bool    founddata(int data)
+ *   int     getnodeschecked()
+ * 
+ * Private Methods:
+ *   void      print(Node *root)
+ *   void      insert(json data, Node *&root)
+ *   Node      *findmin(Node*root)
+ *   Node      *remove(int data, Noderoot)
+ *   int       height()
+ *   jsondata  findnode(int id, Node*root)
+ *   bool      founddata(string data, Node*root)
+ * 
+ * Usage: 
+ * 
+ *      IDBST List1;   //creatin a tree
+ *      List1.insert(data)  //inserting data into tree
+ *      List1.founddata(1)  //located where the the ID #1 is located in the tree 
+ *      List1.getnodeschecked()  //gives the amount of noodes that needed to be checked to find
+ *                               // data
+ *      
+ */
 class IDBST {
 private:
-  Node *root;
-  int nodeschecked;
+  Node *root;         // the root/head of the tree
+  int nodeschecked;   
   void print(Node *root) {
     if (!root) {
       return;
