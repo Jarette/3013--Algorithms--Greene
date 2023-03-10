@@ -414,9 +414,9 @@ private:
 * 
 * Params:
 *      Node   *root   //root of the tree 
-* 
+*      int     id     // the data being searched for 
 * Returns:
-*     int   : the height of the tree
+*     bool   : true or false based on  if the data is found or not
 */
   bool founddata(int id, Node*root){
     nodeschecked++;
@@ -735,9 +735,9 @@ jsondata findnode(string data,Node*root){
 * 
 * Params:
 *      Node   *root   //root of the tree 
-* 
+*      string data    // the data being searched 
 * Returns:
-*     int   : the height of the tree
+*     bool   : true or false based on if the data is found
 */
 bool founddata(string data, Node*root){
     nodeschecked++;
@@ -1055,9 +1055,9 @@ jsondata findnode(string data,Node*root){
 * 
 * Params:
 *      Node   *root   //root of the tree 
-* 
+*      strinng data   // the data being searched
 * Returns:
-*     int   : the height of the tree
+*     bool   : true or false based on if the data is found or not 
 */
 bool founddata(string data, Node*root){
     nodeschecked++;
@@ -1375,9 +1375,9 @@ jsondata findnode(string data,Node*root){
 * 
 * Params:
 *      Node   *root   //root of the tree 
-* 
+*      string  data // data being looked for 
 * Returns:
-*     int   : the height of the tree
+*     bool   : true or false based on if the data is found 
 */
 bool founddata(string data, Node*root){
     nodeschecked++;
@@ -1695,9 +1695,9 @@ jsondata findnode(string data,Node*root){
 * 
 * Params:
 *      Node   *root   //root of the tree 
-* 
+*      string   data  // data to be looked for 
 * Returns:
-*     int   : the height of the tree
+*     bool : true or false based on if the data is found 
 */
 bool founddata(string data, Node*root){
     nodeschecked++;
@@ -2015,9 +2015,9 @@ jsondata findnode(string data,Node*root){
 * 
 * Params:
 *      Node   *root   //root of the tree 
-* 
+*      string   data  // data being looked for
 * Returns:
-*     int   : the height of the tree
+*     bool   : true or false if the data is found or not
 */
 bool founddata(string data, Node*root){
     nodeschecked++;
@@ -2129,10 +2129,57 @@ bool founddata(string data){nodeschecked = 0; return founddata(data,root);}
 */
 int getnodeschecked(){return nodeschecked;}
 };
+/**
+ * LONGBST
+ * 
+ * Description:
+ *      A binary search tree that uses the longitude field of the data
+ *      as the main key used to search, sort and delete data
+ * 
+ * Public Methods:
+ *           LNBST()                
+ *   void    insert(jsondata data)  
+ *   void    print()                 
+ *   Node*   remove(double data)        
+ *   int     height()                 
+ *   bool    founddata(string data)    
+ *   int     getnodeschecked()    
+ * 
+ * Private Methods:
+ *   void      print(Node *root)      
+ *   void      insert(json data, Node *&root)   
+ *   Node      *findmin(Node*root)              
+ *   Node      *remove(double data, Noderoot)      
+ *   int       height()                        
+ *   jsondata  findnode(double data, Node*root)     
+ *   bool      founddata(double data, Node*root) 
+ *        
+ * 
+ * Usage: 
+ * 
+ *      LONGBST List1;   //creating a tree
+ *      List1.insert(data)  //inserting data into tree
+ *      List1.founddata("21.2232")  //located where the longitude is located in the tree 
+ *      List1.getnodeschecked()  //gives the amount of noodes that needed to be checked to find
+ *                               // data
+ *      
+ */
 class LONGBST {
 private:
-  Node *root;
-  int nodeschecked;
+  Node *root;      // the root of the tree
+  int nodeschecked; // stores the number of nodes to be checked to find data
+  /**
+     * Private : print
+     * 
+     * Description:
+     *      used to print the data stored in the tree 
+     * 
+     * Params:
+     *      Node   *root   //root of the tree 
+     * 
+     * Returns:
+     *     N/A
+     */
   void print(Node *root) {
     if (!root) {
       return;
@@ -2141,6 +2188,19 @@ private:
     root->data.display();
     print(root->right);
   }
+/**
+* Private : insert
+* 
+* Description:
+*      puts data into the tree 
+* 
+* Params:
+*      Node      *root   //root of the tree 
+*      jsondata  data    // data to be inserted 
+* 
+* Returns:
+*     N/A
+*/
   void insert(jsondata data, Node *&root) {
     if (!root) {
       root = new Node(data);
@@ -2152,6 +2212,18 @@ private:
       insert(data, root->right);
     }
   }
+/**
+* Private : findmin
+* 
+* Description:
+*     finds the smallest node in a tree
+* 
+* Params:
+*      Node   *root   //root of the tree 
+* 
+* Returns:
+*     Node*   : pointer to a node 
+*/
   Node *findmin(Node *root) {
     Node *temp = root;
     while (temp->left != nullptr) {
@@ -2159,6 +2231,19 @@ private:
     }
     return temp;
   }
+/**
+* Private : removes
+* 
+* Description:
+*     removes node from tree that contains specfied data 
+* 
+* Params:
+*      Node   *root   //root of the tree 
+*      double  data   // the data being looked for 
+* 
+* Returns:
+*     Node*   : pointer to a node 
+*/
   Node *remove(double data, Node *root) {
     if (root == nullptr) {
       return nullptr;
@@ -2187,12 +2272,37 @@ private:
     }
     return root;
   }
+/**
+* Private : height
+* 
+* Description:
+*    finds the height of the tree 
+* 
+* Params:
+*      Node   *root   //root of the tree 
+* 
+* Returns:
+*     int   : the height of the tree
+*/
   int height(Node *root) {
     if (!root) {
       return 0;
     }
     return 1 + max(height(root->left), height(root->right));
   }
+/**
+* Private : findnode
+* 
+* Description:
+*   used to find a node and get the data from it 
+* 
+* Params:
+*      Node   *root   //root of the tree 
+*     double    data  //the data being searched for 
+* 
+* Returns:
+*     jsondata   : the stored in the found node 
+*/
   jsondata findnode(double data, Node*root){
     jsondata temp;
     if(!root){
@@ -2207,24 +2317,19 @@ private:
       return findnode(data,root->right);
     }
   }
-int findnodecount(double data,Node*root){
-  jsondata temp;
-  int nodeschecked = 1;
-  if(!root){
-    return nodeschecked;
-  }
-  if(root->data.longitude == data){
-    return nodeschecked;
-  }
-  else if(data<root->data.longitude){
-    nodeschecked++;
-    return findnodecount(data,root->left);
-  }
-  else{
-    nodeschecked++;
-    return findnodecount(data,root->right);
-  }
-}
+/**
+* Private : founddata
+* 
+* Description:
+*   finds the node containing data specifed and count the 
+*   of nodes that was needed to checked to find it 
+* 
+* Params:
+*      Node   *root   //root of the tree 
+*      double  data   // the data being looked for 
+* Returns:
+*     bool   : true or false based on if the data is found or not 
+*/
 bool founddata(double data, Node*root){
     nodeschecked++;
     if(!root){
