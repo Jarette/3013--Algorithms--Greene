@@ -3071,17 +3071,98 @@ bool founddata(string data){nodeschecked = 0; return founddata(data,root);}
 */
 int getnodeschecked(){return nodeschecked;}
 };
+/**
+ * Database
+ * 
+ * Description:
+ *      class contianing all the Binary search trees and allows the 
+ *      user to access all of the different trees easily.
+ * 
+ * Public Methods:
+ *             Database(vector<jsondaata> data)
+ *     void    insert(jsondata)
+ *     void    RemoveID(int data) 
+ *     void    RemoveFN(string data) 
+ *     void    RemoveLN(string data) 
+ *     void    RemoveEM(string data) 
+ *     void    RemovePH(string data)
+ *     void    RemoveAD(string data) 
+ *     void    RemoveLONG(double data) 
+ *     void    RemoveLAT(double data)
+ *     void    RemoveCM(string data) 
+ *     bool    FoundID(int data)
+ *     int     GetIDNodes()
+ *     int     GetheightID()
+ *     bool    FoundFN(string data)
+ *     int     GetFNNodes()
+ *     int     GetheightFN()
+ *     bool    FoundLN(string data)
+ *     int     GetLNNodes()
+ *     int     GetheightLN()
+ *     bool    FoundEM(string data)
+ *     int     GetEMNodes()
+ *     int     GetheightEM()
+ *     bool    FoundPH(string data)
+ *     int     GetPHNodes()
+ *     int     GetheightPH()
+ *     bool    FoundAD(string data)
+ *     int     GetADNodes()
+ *     int     GetheightAD()
+ *     bool    FoundLONG(double data)
+ *     int     GetLONGNodes()
+ *     int     GetheightLONG()
+ *     bool    FoundLAT(double data)
+ *     int     GetLATNodes()
+ *     int     GetheightLAT()
+ *     bool    FoundCM(string data)
+ *     int     GetCMNodes()
+ *     int     GetheightCM()
+ *     void    Print_inorder(int choice)
+ * 
+ * Private Methods:
+ * 
+ *      void   IDSort(vector<jsondata> &data)
+ *      void   FNSort(vector<jsondata> &data)
+ *      void   LNSort(vector<jsondata> &data)
+ *      void   EMSort(vector<jsondata> &data)
+ *      void   PHSort(vector<jsondata> &data) 
+ *      void   ADSort(vector<jsondata> &data)
+ *      void   LONGSort(vector<jsondata> &data)
+ *      void   LATSort(vector<jsondata> &data)
+ *      void   CMSort(vector<jsondata> &data)
+ * 
+ * Usage: 
+ *      vector <jsondata> A;
+ *      Database Test(A)  // passing in data into the database
+ *      Test.FoundID(1)   // returns true or false if the ID# 1 is in the database
+ *      Test.GetIDNodes  // returns howmany nodes needed to be checked to find
+ *                        // previously searched ID
+ *      Print_in_order(1)   // displays the entire list in order based on the choice entered
+ */
 class Database {
 private:
-  IDBST List1;
-  FNBST List2;
-  LNBST List3;
-  EMBST List4;
-  PHBST List5;
-  ADBST List6;
-  LONGBST List7;
-  LATBST List8;
-  CMBST List9;
+  IDBST List1;      //ID binary SearchTree
+  FNBST List2;      // First Name Binary Search Tree
+  LNBST List3;      // Last Name Binary Search Tree
+  EMBST List4;      // Email Binary Search Tree
+  PHBST List5;      // Phone Number Binary Search Tree
+  ADBST List6;      // Address Binary Search Tree
+  LONGBST List7;    // Longitude Binary Search Tree
+  LATBST List8;     // Latitude Binary  Search Tree
+  CMBST List9;      // Car Model Binary Search tree 
+
+/**
+* Private : IDSort
+* 
+* Description:
+*      Sorts the vector based on the ID#
+* 
+* Params:
+*      vector<jsondata> &data 
+* 
+* Returns:
+*      N/A
+*/
   void IDSort(vector<jsondata> &data) {
     for (int i = 0; i < (data.size() - 1); i++) {
       for (int j = (i + 1); j < data.size(); j++) {
@@ -3091,6 +3172,18 @@ private:
       }
     }
   }
+/**
+* Private : FNSort
+* 
+* Description:
+*      Sorts the vector based on the First Name
+* 
+* Params:
+*      vector<jsondata> &data 
+* 
+* Returns:
+*      N/A
+*/
   void FNSort(vector<jsondata> &data) {
     for (int i = 0; i < (data.size() - 1); i++) {
       for (int j = (i + 1); j < data.size(); j++) {
@@ -3100,6 +3193,18 @@ private:
       }
     }
   }
+/**
+* Private : LNSort
+* 
+* Description:
+*      Sorts the vector based on the LAst Name
+* 
+* Params:
+*      vector<jsondata> &data 
+* 
+* Returns:
+*      N/A
+*/
   void LNSort(vector<jsondata> &data) {
     for (int i = 0; i < (data.size() - 1); i++) {
       for (int j = (i + 1); j < data.size(); j++) {
@@ -3109,6 +3214,18 @@ private:
       }
     }
   }
+/**
+* Private : EMSort
+* 
+* Description:
+*      Sorts the vector based on the Email
+* 
+* Params:
+*      vector<jsondata> &data 
+* 
+* Returns:
+*      N/A
+*/
   void EMSort(vector<jsondata> &data) {
     for (int i = 0; i < (data.size() - 1); i++) {
       for (int j = (i + 1); j < data.size(); j++) {
@@ -3118,6 +3235,18 @@ private:
       }
     }
   }
+/**
+* Private : PHSort
+* 
+* Description:
+*      Sorts the vector based on the Phone number
+* 
+* Params:
+*      vector<jsondata> &data 
+* 
+* Returns:
+*      N/A
+*/
   void PHSort(vector<jsondata> &data) {
     for (int i = 0; i < (data.size() - 1); i++) {
       for (int j = (i + 1); j < data.size(); j++) {
@@ -3127,6 +3256,18 @@ private:
       }
     }
   }
+/**
+* Private : ADSort
+* 
+* Description:
+*      Sorts the vector based on the Address
+* 
+* Params:
+*      vector<jsondata> &data 
+* 
+* Returns:
+*      N/A
+*/
   void ADSort(vector<jsondata> &data) {
     for (int i = 0; i < (data.size() - 1); i++) {
       for (int j = (i + 1); j < data.size(); j++) {
@@ -3136,6 +3277,18 @@ private:
       }
     }
   }
+/**
+* Private : LONGSort
+* 
+* Description:
+*      Sorts the vector based on the longitude
+* 
+* Params:
+*      vector<jsondata> &data 
+* 
+* Returns:
+*      N/A
+*/
   void LONGSort(vector<jsondata> &data) {
     for (int i = 0; i < (data.size() - 1); i++) {
       for (int j = (i + 1); j < data.size(); j++) {
@@ -3145,6 +3298,18 @@ private:
       }
     }
   }
+/**
+* Private : LATSort
+* 
+* Description:
+*      Sorts the vector based on the Latitude
+* 
+* Params:
+*      vector<jsondata> &data 
+* 
+* Returns:
+*      N/A
+*/
   void LATSort(vector<jsondata> &data) {
     for (int i = 0; i < (data.size() - 1); i++) {
       for (int j = (i + 1); j < data.size(); j++) {
@@ -3154,6 +3319,18 @@ private:
       }
     }
   }
+/**
+* Private : CMSort
+* 
+* Description:
+*      Sorts the vector based on the Carmodel
+* 
+* Params:
+*      vector<jsondata> &data 
+* 
+* Returns:
+*      N/A
+*/
   void CMSort(vector<jsondata> &data) {
     for (int i = 0; i < (data.size() - 1); i++) {
       for (int j = (i + 1); j < data.size(); j++) {
@@ -3165,14 +3342,26 @@ private:
   }
 
 public:
+/**
+* Public : Database
+* 
+* Description:
+*      Constructor to fill the database
+* 
+* Params:
+*      vector<jsondata> &data 
+* 
+* Returns:
+*      N/A
+*/
   Database(vector<jsondata> data) {
-    IDSort(data);
+    IDSort(data);        // sorts the data
     int mid = data.size() / 2;
-    jsondata temp = data[mid];
+    jsondata temp = data[mid];      // finds the median 
     data.erase(data.begin()+mid);
-    random_shuffle(data.begin(),data.end());
-    data.insert(data.begin(),temp);
-    for (int i = 0; i < data.size(); i++) {
+    random_shuffle(data.begin(),data.end()); //reshuffles data
+    data.insert(data.begin(),temp);   //puts median data to the front
+    for (int i = 0; i < data.size(); i++) { //puts all data in approipriate tree
       List1.insert(data[i]);
     }
     FNSort(data);
@@ -3240,6 +3429,18 @@ public:
       List9.insert(data[i]);
     }
   }
+  /**
+* Public : insert 
+* 
+* Description:
+*      Places data into each tree in the database
+* 
+* Params:
+*      jsondata   data 
+* 
+* Returns:
+*      N/A
+*/
   void insert(jsondata data) {
     List1.insert(data);
     List2.insert(data);
@@ -3251,43 +3452,505 @@ public:
     List8.insert(data);
     List9.insert(data);
   }
+  /**
+* Public : RemoveID 
+* 
+* Description:
+*      Removes Item from tree based on the ID passed
+* 
+* Params:
+*      int   data 
+* 
+* Returns:
+*      N/A
+*/
   void RemoveID(int data) { List1.remove(data); }
+  /**
+* Public : RemoveFn 
+* 
+* Description:
+*      Removes Item from tree based on the first name passed
+* 
+* Params:
+*      string   data 
+* 
+* Returns:
+*      N/A
+*/
   void RemoveFN(string data) { List2.remove(data); }
+/**
+* Public : RemoveLN
+* 
+* Description:
+*      Removes Item from tree based on the  last name passed
+* 
+* Params:
+*      string   data 
+* 
+* Returns:
+*      N/A
+*/
   void RemoveLN(string data) { List3.remove(data); }
+/**
+* Public : RemoveEM
+* 
+* Description:
+*      Removes Item from tree based on the email passed
+* 
+* Params:
+*      string   data 
+* 
+* Returns:
+*      N/A
+*/
   void RemoveEM(string data) { List4.remove(data); }
+/**
+* Public : RemovePH
+* 
+* Description:
+*      Removes Item from tree based on the phone passed
+* 
+* Params:
+*      string   data 
+* 
+* Returns:
+*      N/A
+*/
   void RemovePH(string data) { List5.remove(data); }
+/**
+* Public : RemoveAD
+* 
+* Description:
+*      Removes Item from tree based on the address passed
+* 
+* Params:
+*      string   data 
+* 
+* Returns:
+*      N/A
+*/
   void RemoveAD(string data) { List6.remove(data); }
+/**
+* Public : RemoveLONG
+* 
+* Description:
+*      Removes Item from tree based on the longitude passed
+* 
+* Params:
+*      double   data 
+* 
+* Returns:
+*      N/A
+*/
   void RemoveLONG(double data) { List7.remove(data); }
+/**
+* Public : RemoveLAT
+* 
+* Description:
+*      Removes Item from tree based on the latitude passed
+* 
+* Params:
+*      double   data 
+* 
+* Returns:
+*      N/A
+*/
   void RemoveLAT(double data) { List8.remove(data); }
+/**
+* Public : RemoveCM
+* 
+* Description:
+*      Removes Item from tree based on the car model passed
+* 
+* Params:
+*      string   data 
+* 
+* Returns:
+*      N/A
+*/
   void RemoveCM(string data) { List9.remove(data); }
+/**
+* Public : FoundID
+* 
+* Description:
+*      returns true or false based on if the ID passed is found 
+*      with the tree.
+* 
+* Params:
+*      int    data 
+* 
+* Returns:
+*      bool   :  true or false (1 or 0)
+*/
   bool FoundID(int data){ return List1.founddata(data);}
+/**
+* Public : GetIDNodes
+* 
+* Description:
+*      returns the amount of nodes that need to be checked to 
+*     find the ID that was previously searched 
+* 
+* Params:
+*     N/A 
+* 
+* Returns:
+*      int   :  the number of nodes checked 
+*/
   int  GetIDNodes(){ return List1.getnodeschecked();}
+/**
+* Public : GetheightID
+* 
+* Description:
+*      returns the height of the ID BST Tree
+* 
+* Params:
+*     N/A 
+* 
+* Returns:
+*      int   :  the height of the tree
+*/
   int  GetheightID(){return List1.height();}
+/**
+* Public : FoundFN
+* 
+* Description:
+*      returns true or false based on if the first name passed is found 
+*      with the tree.
+* 
+* Params:
+*      string    data 
+* 
+* Returns:
+*      bool   :  true or false (1 or 0)
+*/
   bool FoundFN(string data){ return List2.founddata(data);}
+/**
+* Public : GetFNNodes
+* 
+* Description:
+*      returns the amount of nodes that need to be checked to 
+*     find the first name that was previously searched 
+* 
+* Params:
+*     N/A 
+* 
+* Returns:
+*      int   :  the number of nodes checked 
+*/
   int  GetFNNodes(){ return List2.getnodeschecked();}
+/**
+* Public : GetheightFN
+* 
+* Description:
+*      returns the height of the first name BST Tree
+* 
+* Params:
+*     N/A 
+* 
+* Returns:
+*      int   :  the height of the tree
+*/
   int  GetheightFN(){return List2.height();}
+/**
+* Public : FoundLN
+* 
+* Description:
+*      returns true or false based on if the last name passed is found 
+*      with the tree.
+* 
+* Params:
+*      string    data 
+* 
+* Returns:
+*      bool   :  true or false (1 or 0)
+*/
   bool FoundLN(string data){ return List3.founddata(data);}
+/**
+* Public : GetLNNodes
+* 
+* Description:
+*      returns the amount of nodes that need to be checked to 
+*     find the last name that was previously searched 
+* 
+* Params:
+*     N/A 
+* 
+* Returns:
+*      int   :  the number of nodes checked 
+*/
   int  GetLNNodes(){ return List3.getnodeschecked();}
+/**
+* Public : GetheightLN
+* 
+* Description:
+*      returns the height of the last name BST Tree
+* 
+* Params:
+*     N/A 
+* 
+* Returns:
+*      int   :  the height of the tree
+*/
   int  GetheightLN(){return List3.height();}
+/**
+* Public : FoundEM
+* 
+* Description:
+*      returns true or false based on if the email passed is found 
+*      with the tree.
+* 
+* Params:
+*      string    data 
+* 
+* Returns:
+*      bool   :  true or false (1 or 0)
+*/
   bool FoundEM(string data){ return List4.founddata(data);}
+/**
+* Public : GetEMNodes
+* 
+* Description:
+*      returns the amount of nodes that need to be checked to 
+*     find the email that was previously searched 
+* 
+* Params:
+*     N/A 
+* 
+* Returns:
+*      int   :  the number of nodes checked 
+*/
   int  GetEMNodes(){ return List4.getnodeschecked();}
+/**
+* Public : GetheightEM
+* 
+* Description:
+*      returns the height of the email BST Tree
+* 
+* Params:
+*     N/A 
+* 
+* Returns:
+*      int   :  the height of the tree
+*/
   int  GetheightEM(){return List4.height();}
+/**
+* Public : FoundPH
+* 
+* Description:
+*      returns true or false based on if the phone number passed is found 
+*      with the tree.
+* 
+* Params:
+*      string    data 
+* 
+* Returns:
+*      bool   :  true or false (1 or 0)
+*/
   bool FoundPH(string data){ return List5.founddata(data);}
+/**
+* Public : GetPHNodes
+* 
+* Description:
+*      returns the amount of nodes that need to be checked to 
+*     find the phone number that was previously searched 
+* 
+* Params:
+*     N/A 
+* 
+* Returns:
+*      int   :  the number of nodes checked 
+*/
   int  GetPHNodes(){ return List5.getnodeschecked();}
+/**
+* Public : GetheighPH
+* 
+* Description:
+*      returns the height of the phone number BST Tree
+* 
+* Params:
+*     N/A 
+* 
+* Returns:
+*      int   :  the height of the tree
+*/
   int  GetheightPH(){return List5.height();}
+/**
+* Public : FoundAD
+* 
+* Description:
+*      returns true or false based on if the Address passed is found 
+*      with the tree.
+* 
+* Params:
+*      string    data 
+* 
+* Returns:
+*      bool   :  true or false (1 or 0)
+*/
   bool FoundAD(string data){ return List6.founddata(data);}
+/**
+* Public : GetADNodes
+* 
+* Description:
+*      returns the amount of nodes that need to be checked to 
+*     find the address that was previously searched 
+* 
+* Params:
+*     N/A 
+* 
+* Returns:
+*      int   :  the number of nodes checked 
+*/
   int  GetADNodes(){ return List6.getnodeschecked();}
+/**
+* Public : GetheightAD
+* 
+* Description:
+*      returns the height of the address BST Tree
+* 
+* Params:
+*     N/A 
+* 
+* Returns:
+*      int   :  the height of the tree
+*/
   int  GetheightAD(){return List6.height();}
+/**
+* Public : FoundLONG
+* 
+* Description:
+*      returns true or false based on if the Longitude passed is found 
+*      with the tree.
+* 
+* Params:
+*      double    data 
+* 
+* Returns:
+*      bool   :  true or false (1 or 0)
+*/
   bool FoundLONG(double data){ return List7.founddata(data);}
+/**
+* Public : GetLONGNodes
+* 
+* Description:
+*      returns the amount of nodes that need to be checked to 
+*     find the longitude that was previously searched 
+* 
+* Params:
+*     N/A 
+* 
+* Returns:
+*      int   :  the number of nodes checked 
+*/
   int  GetLONGNodes(){ return List7.getnodeschecked();}
+/**
+* Public : GetheightLONG
+* 
+* Description:
+*      returns the height of the longitude BST Tree
+* 
+* Params:
+*     N/A 
+* 
+* Returns:
+*      int   :  the height of the tree
+*/
   int  GetheightLONG(){return List7.height();}
+/**
+* Public : FoundLAT
+* 
+* Description:
+*      returns true or false based on if the latitude passed is found 
+*      with the tree.
+* 
+* Params:
+*      double    data 
+* 
+* Returns:
+*      bool   :  true or false (1 or 0)
+*/
   bool FoundLAT(double data){ return List8.founddata(data);}
+/**
+* Public : GetLATNodes
+* 
+* Description:
+*      returns the amount of nodes that need to be checked to 
+*     find the latitude that was previously searched 
+* 
+* Params:
+*     N/A 
+* 
+* Returns:
+*      int   :  the number of nodes checked 
+*/
   int  GetLATNodes(){ return List8.getnodeschecked();}
+/**
+* Public : GetheightLAT
+* 
+* Description:
+*      returns the height of the Latitude BST Tree
+* 
+* Params:
+*     N/A 
+* 
+* Returns:
+*      int   :  the height of the tree
+*/
   int  GetheightLAT(){return List8.height();}
+/**
+* Public : FoundCM
+* 
+* Description:
+*      returns true or false based on if the car model passed is found 
+*      with the tree.
+* 
+* Params:
+*      string    data 
+* 
+* Returns:
+*      bool   :  true or false (1 or 0)
+*/
   bool FoundCM(string data){ return List9.founddata(data);}
+/**
+* Public : GetCMNodes
+* 
+* Description:
+*      returns the amount of nodes that need to be checked to 
+*     find the car model that was previously searched 
+* 
+* Params:
+*     N/A 
+* 
+* Returns:
+*      int   :  the number of nodes checked 
+*/
   int  GetCMNodes(){ return List9.getnodeschecked();}
+/**
+* Public : GetheightCM
+* 
+* Description:
+*      returns the height of the car model BST Tree
+* 
+* Params:
+*     N/A 
+* 
+* Returns:
+*      int   :  the height of the tree
+*/
   int  GetheightCM(){return List9.height();}
-
+/**
+* Public : Print_inorder
+* 
+* Description:
+*      displays all elements of the list in ascending order based on the 
+*      integer passed in 
+* 
+* Params:
+*     int     choice 
+* 
+* Returns:
+*      N/A
+*/
   void Print_inorder(int choice) {
     if (choice == 1) {
       List1.print();
