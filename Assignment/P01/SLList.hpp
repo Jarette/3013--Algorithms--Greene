@@ -30,10 +30,29 @@
 #include <vector>
 #include "Database.hpp"
 using namespace std;
-
+/**
+ * ListNode
+ * 
+ * Description:
+ *      This is a node that contains a next pointer and all the data taken from a
+ *      json file.
+ * 
+ * Public Methods:
+ *            ListNode(jsondata d)   //overloaded constructor for node
+ * 
+ * Private Methods:
+ *    
+ *       N/A
+ * 
+ * Usage: 
+ * 
+ *     ListNode(jsondata d)  //passes jsondata into a node
+ *     
+ *      
+ */
 struct ListNode {
-  jsondata data;
-  ListNode *next;
+  jsondata data;    //the data that is being stored in the node 
+  ListNode *next;   // the location of the next node in the list 
   ListNode(jsondata d) {
     next = nullptr;
     data.id = d.id;
@@ -56,12 +75,56 @@ struct ListNode {
     }
   }
 };
+/**
+ * LList
+ * 
+ * Description:
+ *      A singly list that containing data collected from a json file 
+ * 
+ * Public Methods:
+ *      void      Print()
+ *      void      Insert(jsondata d)
+ *      bool      FindallID(int key)
+ *      bool      FindallFN(string key)
+ *      bool      FindallLN(string key)
+ *      bool      FindallEM(string key)
+ *      bool      FindallPH(string key)
+ *      bool      FindallAD(string key)
+ *      bool      FindallLONG(double key)
+ *      bool      FindallLAT(double key)
+ *      bool      FindallCM(string key)
+ *      void      RemoveID(int key)
+ *      void      RemoveFN(string key)
+ *      void      RemoveLN(string key)
+ *      void      RemoveEM(string key)
+ *      void      RemovePH(string key)
+ *      void      RemoveAD(string key)
+ *      void      RemoveLONG(double key)
+ *      void      RemoveLAT(double key)
+ *      void      RemoveCM(string key)
+ *      int       GetNodesChecked()
+ * 
+ * Private Methods:
+ *    
+ *       N/A
+ * 
+ * Usage: 
+ * 
+ *     LList Test;  //creating intance of list
+ *     Test.Insert(data) //adds data to the list
+ *     Test.FindallID(1) // returns 1 or 0 if the ID# 1 is found in the list
+ *     Test.GetNodesChecked() //returns the amount of nodeds checked to find ID#1
+ *     Test.Print() //displays all the data stored in the list 
+ *     
+ *      
+ */
 class LList {
 private:
-  ListNode *head;
-  ListNode *tail;
-  int nodeschecked;
+  ListNode *head;     //the beginning of the list
+  ListNode *tail;     // the end of the list
+  int nodeschecked;   // stores the amount of nodes checeked to find a piece of data
 public:
+
   LList() {
     head = NULL;
     tail = NULL;
