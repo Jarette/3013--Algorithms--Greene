@@ -124,11 +124,34 @@ private:
   ListNode *tail;     // the end of the list
   int nodeschecked;   // stores the amount of nodes checeked to find a piece of data
 public:
-
+/**
+ * Public: LList
+ * 
+ * Description:
+ *     Default Constructor
+ * 
+ * Params:
+ *      N/A
+ * 
+ * Returns:
+ *      N/A
+*/
   LList() {
     head = NULL;
     tail = NULL;
   }
+/**
+ * Public: Print
+ * 
+ * Description:
+ *     displays all the data in the list
+ * 
+ * Params:
+ *      N/A
+ * 
+ * Returns:
+ *      N/A
+*/
   void Print() {
     ListNode *traverse = head;
     while (traverse) {
@@ -136,6 +159,18 @@ public:
       traverse = traverse->next;
     }
   }
+/**
+ * Public: Insert
+ * 
+ * Description:
+ *     Inserts data into the back of the list
+ * 
+ * Params:
+ *      jsondata    d // the data being stored into the list 
+ * 
+ * Returns:
+ *      N/A
+*/
   void Insert(jsondata d) {
     ListNode *temp = new ListNode(d);
     if (head == NULL) {
@@ -147,7 +182,20 @@ public:
       temp->next= NULL;
     }
   }
-  
+/**
+ * Public: FindallID
+ * 
+ * Description:
+ *     Produces a true or false based on if the ID passed
+ *     is located in the list and also count all the nodes 
+ *     that had to be checked to find the node
+ * 
+ * Params:
+ *      int    key  // the id to be searched 
+ * 
+ * Returns:
+ *      bool   : true or false (1 or 0)
+*/
   bool FindallID(int key) {
     ListNode *traverse = head;
     nodeschecked = 1;
@@ -162,6 +210,20 @@ public:
     nodeschecked = -1;
     return false;
   }
+/**
+ * Public: FindallFN
+ * 
+ * Description:
+ *     Produces a true or false based on if the first name passed
+ *     is located in the list and also count all the nodes 
+ *     that had to be checked to find the node
+ * 
+ * Params:
+ *      string    key  
+ * 
+ * Returns:
+ *      bool   : true or false (1 or 0)
+*/
   bool FindallFN(string key) {
     ListNode *traverse = head;
     nodeschecked = 1;
@@ -176,6 +238,20 @@ public:
     nodeschecked = -1;
     return false;
   }
+/**
+ * Public: FindallLN
+ * 
+ * Description:
+ *     Produces a true or false based on if the last name passed
+ *     is located in the list and also count all the nodes 
+ *     that had to be checked to find the node
+ * 
+ * Params:
+ *      string    key  
+ * 
+ * Returns:
+ *      bool   : true or false (1 or 0)
+*/
   bool FindallLN(string key) {
     ListNode *traverse = head;
     nodeschecked = 1;
@@ -190,6 +266,20 @@ public:
     nodeschecked = -1;
     return false;
   }
+/**
+ * Public: FindallEM
+ * 
+ * Description:
+ *     Produces a true or false based on if the email passed
+ *     is located in the list and also count all the nodes 
+ *     that had to be checked to find the node
+ * 
+ * Params:
+ *      string    key  
+ * 
+ * Returns:
+ *      bool   : true or false (1 or 0)
+*/
   bool FindallEM(string key) {
     ListNode *traverse = head;
     nodeschecked = 1;
@@ -204,6 +294,20 @@ public:
     nodeschecked = -1;
     return false;
   }
+/**
+ * Public: FindallPH
+ * 
+ * Description:
+ *     Produces a true or false based on if the phone number passed
+ *     is located in the list and also count all the nodes 
+ *     that had to be checked to find the node
+ * 
+ * Params:
+ *      string    key  
+ * 
+ * Returns:
+ *      bool   : true or false (1 or 0)
+*/
   bool FindallPH(string key) {
     ListNode *traverse = head;
     nodeschecked = 1;
@@ -218,6 +322,20 @@ public:
     nodeschecked = -1;
     return false;
   }
+/**
+ * Public: FindallAD
+ * 
+ * Description:
+ *     Produces a true or false based on if the address passed
+ *     is located in the list and also count all the nodes 
+ *     that had to be checked to find the node
+ * 
+ * Params:
+ *      string    key  
+ * 
+ * Returns:
+ *      bool   : true or false (1 or 0)
+*/
   bool FindallAD(string key) {
     ListNode *traverse = head;
     nodeschecked = 1;
@@ -232,6 +350,20 @@ public:
     nodeschecked = -1;
     return false;
   }
+/**
+ * Public: FindallLONG
+ * 
+ * Description:
+ *     Produces a true or false based on if the Longitude passed
+ *     is located in the list and also count all the nodes 
+ *     that had to be checked to find the node
+ * 
+ * Params:
+ *      double    key  
+ * 
+ * Returns:
+ *      bool   : true or false (1 or 0)
+*/
   bool FindallLONG(double key) {
     ListNode *traverse = head;
     nodeschecked = 1;
@@ -246,6 +378,20 @@ public:
     nodeschecked = -1;
     return false;
   }
+/**
+ * Public: FindallLAT
+ * 
+ * Description:
+ *     Produces a true or false based on if the Latitude passed
+ *     is located in the list and also count all the nodes 
+ *     that had to be checked to find the node
+ * 
+ * Params:
+ *      double    key  
+ * 
+ * Returns:
+ *      bool   : true or false (1 or 0)
+*/
   bool FindallLAT(double key) {
     ListNode *traverse = head;
     nodeschecked = 1;
@@ -260,6 +406,20 @@ public:
     nodeschecked = -1;
     return false;
   }
+/**
+ * Public: FindallCM
+ * 
+ * Description:
+ *     Produces a true or false based on if the Car model passed
+ *     is located in the list and also count all the nodes 
+ *     that had to be checked to find the node
+ * 
+ * Params:
+ *      string    key  
+ * 
+ * Returns:
+ *      bool   : true or false (1 or 0)
+*/
   bool FindallCM(string key) {
     ListNode *traverse = head;
     nodeschecked = 1;
@@ -274,6 +434,18 @@ public:
     nodeschecked = -1;
     return false;
   }
+  /**
+ * Public: RemoveID
+ * 
+ * Description:
+ *     Searches the list for the passed ID and removes the item from the list
+ * 
+ * Params:
+ *      int    key  
+ * 
+ * Returns:
+ *      N/A
+*/
   void RemoveID(int key) {
     if (head->data.id == key) {
       ListNode *temp = head;
@@ -298,6 +470,18 @@ public:
       delete temp;
     }
   }
+  /**
+ * Public: RemoveFN
+ * 
+ * Description:
+ *     Searches the list for the passed first name and removes the item from the list
+ * 
+ * Params:
+ *      string    key  
+ * 
+ * Returns:
+ *      N/A
+*/
  void RemoveFN(string key){
     if(head->data.fname == key){
       ListNode*temp = head;
@@ -324,6 +508,18 @@ public:
       delete temp;
     }
   }
+  /**
+ * Public: RemoveLN
+ * 
+ * Description:
+ *     Searches the list for the passed last name and removes the item from the list
+ * 
+ * Params:
+ *      string    key  
+ * 
+ * Returns:
+ *      N/A
+*/
 void RemoveLN(string key){
     if(head->data.lname == key){
       ListNode*temp = head;
@@ -350,6 +546,18 @@ void RemoveLN(string key){
       delete temp;
     }
   }
+  /**
+ * Public: RemoveEM
+ * 
+ * Description:
+ *     Searches the list for the passed email and removes the item from the list
+ * 
+ * Params:
+ *      string    key  
+ * 
+ * Returns:
+ *      N/A
+*/
  void RemoveEM(string key){
     if(head->data.email == key){
       ListNode*temp = head;
@@ -376,6 +584,18 @@ void RemoveLN(string key){
       delete temp;
     }
   }
+  /**
+ * Public: RemovePH
+ * 
+ * Description:
+ *     Searches the list for the passed Phone number and removes the item from the list
+ * 
+ * Params:
+ *      string    key  
+ * 
+ * Returns:
+ *      N/A
+*/
 void RemovePH(string key){
     if(head->data.phone == key){
       ListNode*temp = head;
@@ -402,6 +622,18 @@ void RemovePH(string key){
       delete temp;
     }
   }
+  /**
+ * Public: RemoveAD
+ * 
+ * Description:
+ *     Searches the list for the passed Address and removes the item from the list
+ * 
+ * Params:
+ *      string    key  
+ * 
+ * Returns:
+ *      N/A
+*/
  void RemoveAD(string key){
     if(head->data.address == key){
       ListNode*temp = head;
@@ -428,6 +660,18 @@ void RemovePH(string key){
       delete temp;
     }
   }
+  /**
+ * Public: RemoveLONG
+ * 
+ * Description:
+ *     Searches the list for the passed longitude and removes the item from the list
+ * 
+ * Params:
+ *      double    key  
+ * 
+ * Returns:
+ *      N/A
+*/
 void RemoveLONG(double key){
     if(head->data.longitude == key){
       ListNode*temp = head;
@@ -454,6 +698,18 @@ void RemoveLONG(double key){
       delete temp;
     }
   }
+  /**
+ * Public: RemoveLAT
+ * 
+ * Description:
+ *     Searches the list for the passed latitude and removes the item from the list
+ * 
+ * Params:
+ *      double    key  
+ * 
+ * Returns:
+ *      N/A
+*/
  void RemoveLAT(double key){
     if(head->data.latitude == key){
       ListNode*temp = head;
@@ -480,6 +736,18 @@ void RemoveLONG(double key){
       delete temp;
     }
   }
+  /**
+ * Public: RemoveCM
+ * 
+ * Description:
+ *     Searches the list for the passed car model and removes the item from the list
+ * 
+ * Params:
+ *      string    key  
+ * 
+ * Returns:
+ *      N/A
+*/
 void RemoveCM(string key){
     size_t found;
     if(head->data.carmodel== key){
@@ -507,6 +775,19 @@ void RemoveCM(string key){
       delete temp;
     }
   }
+  /**
+ * Public: GetNodesChecked
+ * 
+ * Description:
+ *     returns the amount of nodes checked when searching for 
+ *     the last data being searched for.
+ * 
+ * Params:
+ *      double    key  
+ * 
+ * Returns:
+ *      N/A
+*/
   int GetNodesChecked(){
     return nodeschecked;
   }
