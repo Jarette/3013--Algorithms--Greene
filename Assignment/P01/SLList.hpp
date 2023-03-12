@@ -1,9 +1,36 @@
+/*****************************************************************************
+*                    
+*  Author:           Jarette Greene
+*  Email:            jkgreene0406@my.msutexas.edu / jarettegreene09@gmail.com
+*  Label:            P01
+*  Title:            Database Indexes... What?!? (not really)
+*  Course:           CMPS 3013
+*  Semester:         Spring 2023
+* 
+*  Description:
+*        This Hpp file contains a singly linked list that will contain data 
+*        read from a JSON file and will be able to traverse the list to find 
+*       data based on varous different keys and determine how much nodes needed
+*       
+* 
+*  Usage:
+*      - create instance of list 
+*      - insert json data into the list
+*      - find data based the key data you want 
+*      - find out how many nodes had to be checked before finding the data
+* 
+*  Files:           
+*        Database.hpp     :        database header file
+*        SLList.hpp       :        the singly linked list  
+*****************************************************************************/
+//necessary Libraries
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
 #include "Database.hpp"
 using namespace std;
+
 struct ListNode {
   jsondata data;
   ListNode *next;
@@ -33,6 +60,7 @@ class LList {
 private:
   ListNode *head;
   ListNode *tail;
+  int nodeschecked;
 public:
   LList() {
     head = NULL;
@@ -57,86 +85,131 @@ public:
     }
   }
   
-  int FindallID(int key) {
+  bool FindallID(int key) {
     ListNode *traverse = head;
-    int nodeschecked = 1;
-    while (traverse->data.id!=key) {
+    nodeschecked = 1;
+    while (traverse) {
+      if(traverse->data.id!=key){
       nodeschecked++;
       traverse = traverse->next;
+      }else{
+        return true;
+      }
     }
-    return nodeschecked;
+    nodeschecked = -1;
+    return false;
   }
- int FindallFN(string key) {
+  bool FindallFN(string key) {
     ListNode *traverse = head;
-    int nodeschecked = 1;
-    while (traverse->data.fname!=key) {
+    nodeschecked = 1;
+    while (traverse) {
+      if(traverse->data.fname!=key){
       nodeschecked++;
       traverse = traverse->next;
+      }else{
+        return true;
+      }
     }
-    return nodeschecked;
+    nodeschecked = -1;
+    return false;
   }
-int FindallLN(string key) {
+  bool FindallLN(string key) {
     ListNode *traverse = head;
-    int nodeschecked = 1;
-    while (traverse->data.lname!=key) {
+    nodeschecked = 1;
+    while (traverse) {
+      if(traverse->data.lname!=key){
       nodeschecked++;
       traverse = traverse->next;
+      }else{
+        return true;
+      }
     }
-    return nodeschecked;
+    nodeschecked = -1;
+    return false;
   }
-int FindallEM(string key) {
+  bool FindallEM(string key) {
     ListNode *traverse = head;
-    int nodeschecked = 1;
-    while (traverse->data.email!=key) {
+    nodeschecked = 1;
+    while (traverse) {
+      if(traverse->data.email!=key){
       nodeschecked++;
       traverse = traverse->next;
+      }else{
+        return true;
+      }
     }
-    return nodeschecked;
+    nodeschecked = -1;
+    return false;
   }
-int FindallPH(string key) {
+  bool FindallPH(string key) {
     ListNode *traverse = head;
-    int nodeschecked = 1;
-    while (traverse->data.phone!=key) {
+    nodeschecked = 1;
+    while (traverse) {
+      if(traverse->data.phone!=key){
       nodeschecked++;
       traverse = traverse->next;
+      }else{
+        return true;
+      }
     }
-    return nodeschecked;
+    nodeschecked = -1;
+    return false;
   }
-int FindallAD(string key) {
+  bool FindallAD(string key) {
     ListNode *traverse = head;
-    int nodeschecked = 1;
-    while (traverse->data.address!=key) {
+    nodeschecked = 1;
+    while (traverse) {
+      if(traverse->data.address!=key){
       nodeschecked++;
       traverse = traverse->next;
+      }else{
+        return true;
+      }
     }
-    return nodeschecked;
+    nodeschecked = -1;
+    return false;
   }
-int FindallLONG(double key) {
+  bool FindallLONG(double key) {
     ListNode *traverse = head;
-    int nodeschecked = 1;
-    while (traverse->data.longitude!=key) {
+    nodeschecked = 1;
+    while (traverse) {
+      if(traverse->data.longitude!=key){
       nodeschecked++;
       traverse = traverse->next;
+      }else{
+        return true;
+      }
     }
-    return nodeschecked;
+    nodeschecked = -1;
+    return false;
   }
-int FindallLAT(double key) {
+  bool FindallLAT(double key) {
     ListNode *traverse = head;
-    int nodeschecked = 1;
-    while (traverse->data.latitude!=key) {
+    nodeschecked = 1;
+    while (traverse) {
+      if(traverse->data.latitude!=key){
       nodeschecked++;
       traverse = traverse->next;
+      }else{
+        return true;
+      }
     }
-    return nodeschecked;
+    nodeschecked = -1;
+    return false;
   }
-int FindallCM(string key) {
+  bool FindallCM(string key) {
     ListNode *traverse = head;
-    int nodeschecked = 1;
-    while (traverse->data.carmodel!=key) {
+    nodeschecked = 1;
+    while (traverse) {
+      if(traverse->data.carmodel!=key){
       nodeschecked++;
       traverse = traverse->next;
+      }else{
+        return true;
+      }
     }
-    return nodeschecked;
+    nodeschecked = -1;
+    return false;
   }
   void RemoveID(int key) {
     if (head->data.id == key) {
@@ -370,5 +443,8 @@ void RemoveCM(string key){
       traverse->next = traverse->next->next;
       delete temp;
     }
+  }
+  int GetNodesChecked(){
+    return nodeschecked;
   }
 };
