@@ -294,7 +294,7 @@ private:
       root = new Node(data);
       return;
     }
-    if (data.id < root->data.id) {  //trverses left if the data is smaller than node data
+    if (data.id <= root->data.id) {  //trverses left if the data is smaller than node data
       insert(data, root->left);     // right if the data is greater than node data
     } else {
       insert(data, root->right);
@@ -608,7 +608,7 @@ void insert(jsondata data, Node*&root){
     root = new Node(data);
     return;
   }
-  if (data.fname < root->data.fname){
+  if (data.fname <= root->data.fname){
     insert(data,root->left);
   }else{
     insert(data,root->right);
@@ -928,7 +928,7 @@ void insert(jsondata data, Node*&root){
     root = new Node(data);
     return;
   }
-  if (data.lname < root->data.lname){
+  if (data.lname <= root->data.lname){
     insert(data,root->left);
   }else{
     insert(data,root->right);
@@ -1248,7 +1248,7 @@ void insert(jsondata data, Node*&root){
     root = new Node(data);
     return;
   }
-  if (data.email < root->data.email){
+  if (data.email <= root->data.email){
     insert(data,root->left);
   }else{
     insert(data,root->right);
@@ -1568,7 +1568,7 @@ void insert(jsondata data, Node*&root){
     root = new Node(data);
     return;
   }
-  if (data.phone < root->data.phone){
+  if (data.phone <= root->data.phone){
     insert(data,root->left);
   }else{
     insert(data,root->right);
@@ -1888,7 +1888,7 @@ void insert(jsondata data, Node*&root){
     root = new Node(data);
     return;
   }
-  if (data.address < root->data.address){
+  if (data.address <= root->data.address){
     insert(data,root->left);
   }else{
     insert(data,root->right);
@@ -2206,7 +2206,7 @@ private:
       root = new Node(data);
       return;
     }
-    if (data.longitude < root->data.longitude) {
+    if (data.longitude <= root->data.longitude) {
       insert(data, root->left);
     } else {
       insert(data, root->right);
@@ -2517,7 +2517,7 @@ private:
       root = new Node(data);
       return;
     }
-    if (data.latitude < root->data.latitude) {
+    if (data.latitude <= root->data.latitude) {
       insert(data, root->left);
     } else {
       insert(data, root->right);
@@ -2830,7 +2830,7 @@ void insert(jsondata data, Node*&root){
     root = new Node(data);
     return;
   }
-  if (data.carmodel < root->data.carmodel){
+  if (data.carmodel <= root->data.carmodel){
     insert(data,root->left);
   }else{
     insert(data,root->right);
