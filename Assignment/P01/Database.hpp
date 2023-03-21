@@ -1,10 +1,59 @@
+/*****************************************************************************
+*                    
+*  Author:           Jarette Greene
+*  Email:            jkgreene0406@my.msutexas.edu / jarettegreene09@gmail.com
+*  Label:            P01
+*  Title:            Database Indexes... What?!? (not really)
+*  Course:           CMPS 3013
+*  Semester:         Spring 2023
+* 
+*  Description:
+*        This header file contains the Binary Search trees used to create a the 
+*        the database used in the main.cpp file. The Binary search trees in this 
+*        program all accepts data from a Json file stored in a vector of structs. This file
+*        contains 9 binary search trees with each searching using a different key
+*        (ID, First Name, Last Name, Email, Phone, Address, Job Title and 
+*         Car Model). Then places all these trees as attributes in a Database where 
+*         the user can access the tree based on what what type of data they would 
+*         like to search by
+* 
+*  Usage:
+*       - create instance of database
+*       - pass in vector of data into constructor
+*       - Use Found function to see if data is stored within database
+*       - and GetNodes to check how much nodes were checked before finding the data.
+* 
+*  Files:           
+*        Database.hpp     :        database header file
+*****************************************************************************/
 #pragma once
 #include <iostream>
 #include <string>
 #include <vector>
 #include <algorithm>
 using namespace std;
+/**
+ * jsondata
+ * 
+ * Description:
+ *      struct used to keep all data recieved from the json file together
+ * 
+ * Public Methods:
+ *            jsondata()   //constructor
+ *    void    display();   // displays data in the struct
+ * 
+ * Private Methods:
+ *    
+ *       N/A
+ * 
+ * Usage: 
+ * 
+ *     Node(jsondata d)  //passes jsondata into a node
+ *     data.display();   //displays all data stored in the struct
+ *      
+ */
 struct jsondata {
+	 // all fields collected from JSON file
 	int id;
 	string first_name;
 	string last_name;
@@ -22,7 +71,18 @@ struct jsondata {
 	string job_title;
 	string phone_number;
 	vector <string> stocks;
-
+	/**
+ * Public: jsondata
+ * 
+ * Description:
+ *     Default Constructor
+ * 
+ * Params:
+ *      N/A
+ * 
+ * Returns:
+ *      N/A
+*/
 	jsondata() {
 		first_name = "NULL";
 		last_name = "NULL";
@@ -41,7 +101,18 @@ struct jsondata {
 		phone_number = "NULL";
 		stocks.push_back("NULL");
 	}
-
+/**
+ * Public: display
+ * 
+ * Description:
+ *     used to display all data stored in the struct to the screen 
+ * 
+ * Params:
+ *      N/A
+ * 
+ * Returns:
+ *      N/A
+*/
 	void display() {
 		cout << "ID: " << id << endl;
 		cout << "First Name: " << first_name << endl;
@@ -67,15 +138,58 @@ struct jsondata {
 		cout << endl;
 	}
 };
+/**
+ * Node
+ * 
+ * Description:
+ *      Node used to store the values within the tree;
+ * 
+ * Public Methods:
+ *            Node()  //constructor
+ * 			  Ndode(jsondata) // overloaded constructor
+ * 
+ * Private Methods:
+ *    
+ *       N/A
+ * 
+ * Usage: 
+ * 
+ *     Node *temp = new Node(d) //creates and initilizes a new node 
+ *      
+ */
 struct Node {
 	jsondata data;
 	Node* left;
 	Node* right;
 	Node* parent;
 	int avlValue;
+/**
+ * Public: Node
+ * 
+ * Description:
+ *     Default Constructor
+ * 
+ * Params:
+ *     N/A
+ * 
+ * Returns:
+ *      N/A
+*/
 	Node() {
 
 	}
+/**
+ * Public: Node
+ * 
+ * Description:
+ *     Constructor that recieved a struct 
+ * 
+ * Params:
+ *      jsondata d
+ * 
+ * Returns:
+ *      N/A
+*/
 	Node(jsondata d) {
 		data.id = d.id;
 		data.first_name = d.first_name;
@@ -99,9 +213,49 @@ struct Node {
 
 	}
 };
+/**
+ * IDAVL
+ * 
+ * Description:
+ * 		An AVL tree that uses the ID field of the data as the main key for 
+ * 		inseritng and searching.
+ * 	
+ * Public Methods:
+ * 				IDAVL()
+ * 				~IDAVL()
+ * 		void 	insert(jsondata)
+ * 		bool	search(int)
+ * 		int 	GetNodes()
+ * 		void	dumptree()
+ * 
+ * Private: 
+ * 		
+ * 		Node* 	root
+ * 		int 	nodechecked;
+ * 		int 	avlValue(Node* current)
+ * 		void 	computeAvlValues(Node*& current)
+ * 		int 	height(Node* current)
+ * 		void 	insertNode(Node *&current, Node *&newNode)
+ * 		void 	rotateleft(Node *&current)
+ * 		void 	rotateright(Ndde*&current)
+ * 		bool 	rightheavy(Node* current)
+ * 		bool 	leftheavy(Node* current)
+ * 		void 	dodumptree(Node* current)
+ * 
+ * Usage: 
+ * 		
+ * 		IDAVL List;     //creating list object
+ * 		List.insert(data) //adding item to list
+ * 		List.search(7432) // searching the list of ID# 7432
+ * 		List.GetNodes() // the number of nodes checked to finnd the laast thing
+ * 						// searched
+ * 		List.dumptree() // displays the tree
+ * 
+ */
 class IDAVL {
 	Node* root;
 	int nodeschecked;
+
 	int avlValue(Node *current);
 	void computeAvlValues(Node*& current);
 	int height(Node* current);
@@ -121,11 +275,38 @@ public:
 	void dumptree();
 	
 };
+/**
+ * Public: dumptree
+ * 
+ * Description
+ * 		Used to call the dodumptree private function
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void IDAVL::dumptree() {
 	cout << "---------------------------------" << endl;
 	cout << "Root:   " << root << "\n";
 	dodumptree(root);
 }
+/**
+ * Public: dodumptree
+ * 
+ * Description
+ * 		used to display all the elements in the tree and all their connected nodes
+ * 
+ * 
+ * Param:
+ *		Node*  current
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void IDAVL::dodumptree(Node* current) {
 	if (current) {
 		cout << "ADD:	" << current << endl
@@ -140,12 +321,52 @@ void IDAVL::dodumptree(Node* current) {
 
 	}
 }
+/**
+ * Public: IDAVL
+ * 
+ * Description
+ * 		Default constructor
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 IDAVL::IDAVL() {
 	root = 0;
 	nodeschecked = 0;
 }
+/**
+ * Public: IDAVL
+ * 
+ * Description
+ * 		Deconstructor
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 IDAVL :: ~IDAVL() {
 }
+/**
+ * Private: insertNode
+ * 
+ * Description
+ * 		inserts data into the tree
+ * 
+ * Param:
+ *		Node *& 	currrent, 
+*		Node *& 	newNode
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void IDAVL::insertNode(Node*& current, Node*& newNode) {
 	if (current == nullptr) {
 		current = newNode;
@@ -159,6 +380,20 @@ void IDAVL::insertNode(Node*& current, Node*& newNode) {
 		insertNode(current->right, newNode);
 	}
 }
+/**
+ * Public: insert
+ * 
+ * Description
+ * 		calls the private insertNode function and compute all the avl values
+ * 		and performs the approipriate rotation
+ * 
+ * Param:
+ *		jsondata	data
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void IDAVL::insert(jsondata data) {
 	Node* newNode;
 	newNode = new Node;
@@ -169,6 +404,19 @@ void IDAVL::insert(jsondata data) {
 	insertNode(root, newNode);
 	computeAvlValues(root);
 }
+/**
+ * Public: search
+ * 
+ * Description
+ * 		locates all nodes needed to be checked to locate a piece of data 
+ * 
+ * Param:
+ *		int 	data
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 bool IDAVL::search(int data) {
 	Node* current = root;
 	while (current) {
@@ -187,6 +435,19 @@ bool IDAVL::search(int data) {
 	}
 	return false;
 }
+/**
+ * Public: height
+ * 
+ * Description
+ * 		calculates the height of the tree 
+ * 
+ * Param:
+ *		Node* 	current
+ * 
+ * Return 
+ * 		int	 : 	the height of the tree
+ * 
+ */
 int IDAVL::height(Node* current) {
 	int left_height = 0;
 	int right_height = 0;
@@ -204,9 +465,36 @@ int IDAVL::height(Node* current) {
 		return 1 + right_height;
 	}
 }
+/**
+ * Private: avlValue
+ * 
+ * Description
+ * 		calculates the avl value of a node 
+ * 
+ * Param:
+ *		Node* 	current
+ * 
+ * Return 
+ * 		int	 : 	the avl value
+ * 
+ */
 int IDAVL::avlValue(Node* current) {
 	return height(current->right) - height(current->left);
 }
+/**
+ * Private: computeAvlValues
+ * 
+ * Description
+ * 		gets the avl values and performs the approipriate
+ * 		rotations neccesary
+ * 
+ * Param:
+ *		Node	*&current
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void IDAVL::computeAvlValues(Node*& current) {
 	if (current) {
 		computeAvlValues(current->left);
@@ -220,6 +508,19 @@ void IDAVL::computeAvlValues(Node*& current) {
 		}
 	}
 }
+/**
+ * Private: rotateleft
+ * 
+ * Description
+ * 		performs a left rotation on a given node
+ * 
+ * Param:
+ *		Node	*&Subroot
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void IDAVL::rotateleft(Node*& Subroot) {
 	if (lefftheavy(Subroot->right)) {
 		rotateright(Subroot->right);
@@ -232,6 +533,19 @@ void IDAVL::rotateleft(Node*& Subroot) {
 	
 	computeAvlValues(Subroot);
 }
+/**
+ * Private: rotateright
+ * 
+ * Description
+ * 		performs a right rotation on a given node
+ * 
+ * Param:
+ *		Node	*&Subroot
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void IDAVL::rotateright(Node*& Subroot) {
 	if (rightheavy(Subroot->left)) {
 		rotateleft(Subroot->left);
@@ -244,15 +558,94 @@ void IDAVL::rotateright(Node*& Subroot) {
 
 	computeAvlValues(Subroot);
 }
+/**
+ * Private: leftheavy
+ * 
+ * Description
+ * 		checks if a tree is scewed more the left
+ * 
+ * Param:
+ *		Node	*current
+ * 
+ * Return 
+ * 		bool  : true or false
+ * 
+ */
 bool IDAVL::lefftheavy(Node* current) {
 	return height(current->left) > height(current->right);
 }
+/**
+ * Private: rigthheavy
+ * 
+ * Description
+ * 		checks if a tree is scewed more the right
+ * 
+ * Param:
+ *		Node	*current
+ * 
+ * Return 
+ * 		bool  : true or false
+ * 
+ */
 bool IDAVL::rightheavy(Node* current) {
 	return height(current->right) > height(current->left);
 }
+/**
+ * Public: 	GetNodes
+ * 
+ * Description
+ * 		returns the number of nodes checked to find a node containing
+ * 		the last piece of data searched for
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		int  : the number of nodes checked
+ * 
+ */
 int IDAVL::GetNodes() {
 	return nodeschecked;
 }
+/**
+ * FNAVL
+ * 
+ * Description:
+ * 		An AVL tree that uses the First Name field of the data as the main key for 
+ * 		inseritng and searching.
+ * 	
+ * Public Methods:
+ * 				FNAVL()
+ * 				~FNAVL()
+ * 		void 	insert(jsondata)
+ * 		bool	search(int)
+ * 		int 	GetNodes()
+ * 		void	dumptree()
+ * 
+ * Private: 
+ * 		
+ * 		Node* 	root
+ * 		int 	nodechecked;
+ * 		int 	avlValue(Node* current)
+ * 		void 	computeAvlValues(Node*& current)
+ * 		int 	height(Node* current)
+ * 		void 	insertNode(Node *&current, Node *&newNode)
+ * 		void 	rotateleft(Node *&current)
+ * 		void 	rotateright(Ndde*&current)
+ * 		bool 	rightheavy(Node* current)
+ * 		bool 	leftheavy(Node* current)
+ * 		void 	dodumptree(Node* current)
+ * 
+ * Usage: 
+ * 		
+ * 		FNAVL List;     //creating list object
+ * 		List.insert(data) //adding item to list
+ * 		List.search("Hailey") // searching the list of first name Hailey
+ * 		List.GetNodes() // the number of nodes checked to finnd the laast thing
+ * 						// searched
+ * 		List.dumptree() // displays the tree
+ * 
+ */
 class FNAVL {
 	Node* root;
 	int nodeschecked;
@@ -275,11 +668,38 @@ public:
 	void dumptree();
 
 };
+/**
+ * Public: dumptree
+ * 
+ * Description
+ * 		Used to call the dodumptree private function
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void FNAVL::dumptree() {
 	cout << "---------------------------------" << endl;
 	cout << "Root:   " << root << "\n";
 	dodumptree(root);
 }
+/**
+ * Public: dodumptree
+ * 
+ * Description
+ * 		used to display all the elements in the tree and all their connected nodes
+ * 
+ * 
+ * Param:
+ *		Node*  current
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void FNAVL::dodumptree(Node* current) {
 	if (current) {
 		cout << "ADD:	" << current << endl
@@ -294,12 +714,52 @@ void FNAVL::dodumptree(Node* current) {
 
 	}
 }
+/**
+ * Public: FNAVL
+ * 
+ * Description
+ * 		Deconstructor
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 FNAVL::FNAVL() {
 	root = 0;
 	nodeschecked = 0;
 }
+/**
+ * Public: IDAVL
+ * 
+ * Description
+ * 		Deconstructor
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 FNAVL :: ~FNAVL() {
 }
+/**
+ * Private: insertNode
+ * 
+ * Description
+ * 		inserts data into the tree
+ * 
+ * Param:
+ *		Node *& 	currrent, 
+*		Node *& 	newNode
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void FNAVL::insertNode(Node*& current, Node*& newNode) {
 	if (current == nullptr) {
 		current = newNode;
@@ -313,6 +773,19 @@ void FNAVL::insertNode(Node*& current, Node*& newNode) {
 		insertNode(current->right, newNode);
 	}
 }
+/**
+ * Public: search
+ * 
+ * Description
+ * 		locates all nodes needed to be checked to locate a piece of data 
+ * 
+ * Param:
+ *		int 	data
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void FNAVL::insert(jsondata data) {
 	Node* newNode;
 	newNode = new Node;
@@ -323,6 +796,19 @@ void FNAVL::insert(jsondata data) {
 	insertNode(root, newNode);
 	computeAvlValues(root);
 }
+/**
+ * Public: search
+ * 
+ * Description
+ * 		locates all nodes needed to be checked to locate a piece of data 
+ * 
+ * Param:
+ *		int 	data
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 bool FNAVL::search(string data) {
 	Node* current = root;
 	while (current) {
@@ -341,6 +827,19 @@ bool FNAVL::search(string data) {
 	}
 	return false;
 }
+/**
+ * Public: height
+ * 
+ * Description
+ * 		calculates the height of the tree 
+ * 
+ * Param:
+ *		Node* 	current
+ * 
+ * Return 
+ * 		int	 : 	the height of the tree
+ * 
+ */
 int FNAVL::height(Node* current) {
 	int left_height = 0;
 	int right_height = 0;
@@ -358,9 +857,36 @@ int FNAVL::height(Node* current) {
 		return 1 + right_height;
 	}
 }
+/**
+ * Private: avlValue
+ * 
+ * Description
+ * 		calculates the avl value of a node 
+ * 
+ * Param:
+ *		Node* 	current
+ * 
+ * Return 
+ * 		int	 : 	the avl value
+ * 
+ */
 int FNAVL::avlValue(Node* current) {
 	return height(current->right) - height(current->left);
 }
+/**
+ * Private: computeAvlValues
+ * 
+ * Description
+ * 		gets the avl values and performs the approipriate
+ * 		rotations neccesary
+ * 
+ * Param:
+ *		Node	*&current
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void FNAVL::computeAvlValues(Node*& current) {
 	if (current) {
 		computeAvlValues(current->left);
@@ -374,6 +900,19 @@ void FNAVL::computeAvlValues(Node*& current) {
 		}
 	}
 }
+/**
+ * Private: rotateleft
+ * 
+ * Description
+ * 		performs a left rotation on a given node
+ * 
+ * Param:
+ *		Node	*&Subroot
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void FNAVL::rotateleft(Node*& Subroot) {
 	if (lefftheavy(Subroot->right)) {
 		rotateright(Subroot->right);
@@ -386,6 +925,19 @@ void FNAVL::rotateleft(Node*& Subroot) {
 
 	computeAvlValues(Subroot);
 }
+/**
+ * Private: rotateright
+ * 
+ * Description
+ * 		performs a right rotation on a given node
+ * 
+ * Param:
+ *		Node	*&Subroot
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void FNAVL::rotateright(Node*& Subroot) {
 	if (rightheavy(Subroot->left)) {
 		rotateleft(Subroot->left);
@@ -398,12 +950,52 @@ void FNAVL::rotateright(Node*& Subroot) {
 
 	computeAvlValues(Subroot);
 }
+/**
+ * Private: leftheavy
+ * 
+ * Description
+ * 		checks if a tree is scewed more the left
+ * 
+ * Param:
+ *		Node	*current
+ * 
+ * Return 
+ * 		bool  : true or false
+ * 
+ */
 bool FNAVL::lefftheavy(Node* current) {
 	return height(current->left) > height(current->right);
 }
+/**
+ * Private: rigthheavy
+ * 
+ * Description
+ * 		checks if a tree is scewed more the right
+ * 
+ * Param:
+ *		Node	*current
+ * 
+ * Return 
+ * 		bool  : true or false
+ * 
+ */
 bool FNAVL::rightheavy(Node* current) {
 	return height(current->right) > height(current->left);
 }
+/**
+ * Public: 	GetNodes
+ * 
+ * Description
+ * 		returns the number of nodes checked to find a node containing
+ * 		the last piece of data searched for
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		int  : the number of nodes checked
+ * 
+ */
 int FNAVL::GetNodes() {
 	return nodeschecked;
 }
