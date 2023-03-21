@@ -2572,6 +2572,45 @@ bool ADAVL::rightheavy(Node* current) {
 int ADAVL::GetNodes() {
 	return nodeschecked;
 }
+/**
+ * JTAVL
+ * 
+ * Description:
+ * 		An AVL tree that uses the Job Title field of the data as the main key for 
+ * 		inseritng and searching.
+ * 	
+ * Public Methods:
+ * 				JTAVL()
+ * 				~JTAVL()
+ * 		void 	insert(jsondata)
+ * 		bool	search(int)
+ * 		int 	GetNodes()
+ * 		void	dumptree()
+ * 
+ * Private: 
+ * 		
+ * 		Node* 	root
+ * 		int 	nodechecked;
+ * 		int 	avlValue(Node* current)
+ * 		void 	computeAvlValues(Node*& current)
+ * 		int 	height(Node* current)
+ * 		void 	insertNode(Node *&current, Node *&newNode)
+ * 		void 	rotateleft(Node *&current)
+ * 		void 	rotateright(Ndde*&current)
+ * 		bool 	rightheavy(Node* current)
+ * 		bool 	leftheavy(Node* current)
+ * 		void 	dodumptree(Node* current)
+ * 
+ * Usage: 
+ * 		
+ * 		JTAVL List;     //creating list object
+ * 		List.insert(data) //adding item to list
+ * 		List.search("Manager") // searching the list of Job Title Manager
+ * 		List.GetNodes() // the number of nodes checked to finnd the laast thing
+ * 						// searched
+ * 		List.dumptree() // displays the tree
+ * 
+ */
 class JTAVL {
 	Node* root;
 	int nodeschecked;
@@ -2594,11 +2633,38 @@ public:
 	void dumptree();
 
 };
+/**
+ * Public: dumptree
+ * 
+ * Description
+ * 		Used to call the dodumptree private function
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void JTAVL::dumptree() {
 	cout << "---------------------------------" << endl;
 	cout << "Root:   " << root << "\n";
 	dodumptree(root);
 }
+/**
+ * Public: dodumptree
+ * 
+ * Description
+ * 		used to display all the elements in the tree and all their connected nodes
+ * 
+ * 
+ * Param:
+ *		Node*  current
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void JTAVL::dodumptree(Node* current) {
 	if (current) {
 		cout << "ADD:	" << current << endl
@@ -2613,12 +2679,52 @@ void JTAVL::dodumptree(Node* current) {
 
 	}
 }
+/**
+ * Public: JTAVL
+ * 
+ * Description
+ * 		Constructor
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 JTAVL::JTAVL() {
 	root = 0;
 	nodeschecked = 0;
 }
+/**
+ * Public: JTAVL
+ * 
+ * Description
+ * 		DeConstructor
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 JTAVL :: ~JTAVL() {
 }
+/**
+ * Private: insertNode
+ * 
+ * Description
+ * 		inserts data into the tree
+ * 
+ * Param:
+ *		Node *& 	currrent, 
+*		Node *& 	newNode
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void JTAVL::insertNode(Node*& current, Node*& newNode) {
 	if (current == nullptr) {
 		current = newNode;
@@ -2632,6 +2738,20 @@ void JTAVL::insertNode(Node*& current, Node*& newNode) {
 		insertNode(current->right, newNode);
 	}
 }
+/**
+ * Public: insert
+ * 
+ * Description
+ * 		calls the private insertNode function and compute all the avl values
+ * 		and performs the approipriate rotation
+ * 
+ * Param:
+ *		jsondata	data
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void JTAVL::insert(jsondata data) {
 	Node* newNode;
 	newNode = new Node;
@@ -2642,6 +2762,19 @@ void JTAVL::insert(jsondata data) {
 	insertNode(root, newNode);
 	computeAvlValues(root);
 }
+/**
+ * Public: search
+ * 
+ * Description
+ * 		locates all nodes needed to be checked to locate a piece of data 
+ * 
+ * Param:
+ *		int 	data
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 bool JTAVL::search(string data) {
 	Node* current = root;
 	while (current) {
@@ -2660,6 +2793,19 @@ bool JTAVL::search(string data) {
 	}
 	return false;
 }
+/**
+ * Public: height
+ * 
+ * Description
+ * 		calculates the height of the tree 
+ * 
+ * Param:
+ *		Node* 	current
+ * 
+ * Return 
+ * 		int	 : 	the height of the tree
+ * 
+ */
 int JTAVL::height(Node* current) {
 	int left_height = 0;
 	int right_height = 0;
@@ -2677,9 +2823,36 @@ int JTAVL::height(Node* current) {
 		return 1 + right_height;
 	}
 }
+/**
+ * Private: avlValue
+ * 
+ * Description
+ * 		calculates the avl value of a node 
+ * 
+ * Param:
+ *		Node* 	current
+ * 
+ * Return 
+ * 		int	 : 	the avl value
+ * 
+ */
 int JTAVL::avlValue(Node* current) {
 	return height(current->right) - height(current->left);
 }
+/**
+ * Private: computeAvlValues
+ * 
+ * Description
+ * 		gets the avl values and performs the approipriate
+ * 		rotations neccesary
+ * 
+ * Param:
+ *		Node	*&current
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void JTAVL::computeAvlValues(Node*& current) {
 	if (current) {
 		computeAvlValues(current->left);
@@ -2693,6 +2866,19 @@ void JTAVL::computeAvlValues(Node*& current) {
 		}
 	}
 }
+/**
+ * Private: rotateleft
+ * 
+ * Description
+ * 		performs a left rotation on a given node
+ * 
+ * Param:
+ *		Node	*&Subroot
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void JTAVL::rotateleft(Node*& Subroot) {
 	if (lefftheavy(Subroot->right)) {
 		rotateright(Subroot->right);
@@ -2705,6 +2891,19 @@ void JTAVL::rotateleft(Node*& Subroot) {
 
 	computeAvlValues(Subroot);
 }
+/**
+ * Private: rotateright
+ * 
+ * Description
+ * 		performs a right rotation on a given node
+ * 
+ * Param:
+ *		Node	*&Subroot
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void JTAVL::rotateright(Node*& Subroot) {
 	if (rightheavy(Subroot->left)) {
 		rotateleft(Subroot->left);
@@ -2717,15 +2916,94 @@ void JTAVL::rotateright(Node*& Subroot) {
 
 	computeAvlValues(Subroot);
 }
+/**
+ * Private: leftheavy
+ * 
+ * Description
+ * 		checks if a tree is scewed more the left
+ * 
+ * Param:
+ *		Node	*current
+ * 
+ * Return 
+ * 		bool  : true or false
+ * 
+ */
 bool JTAVL::lefftheavy(Node* current) {
 	return height(current->left) > height(current->right);
 }
+/**
+ * Private: rigthheavy
+ * 
+ * Description
+ * 		checks if a tree is scewed more the right
+ * 
+ * Param:
+ *		Node	*current
+ * 
+ * Return 
+ * 		bool  : true or false
+ * 
+ */
 bool JTAVL::rightheavy(Node* current) {
 	return height(current->right) > height(current->left);
 }
+/**
+ * Public: 	GetNodes
+ * 
+ * Description
+ * 		returns the number of nodes checked to find a node containing
+ * 		the last piece of data searched for
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		int  : the number of nodes checked
+ * 
+ */
 int JTAVL::GetNodes() {
 	return nodeschecked;
 }
+/**
+ * CMAVL
+ * 
+ * Description:
+ * 		An AVL tree that uses the Car Model field of the data as the main key for 
+ * 		inseritng and searching.
+ * 	
+ * Public Methods:
+ * 				CMAVL()
+ * 				~CMAVL()
+ * 		void 	insert(jsondata)
+ * 		bool	search(int)
+ * 		int 	GetNodes()
+ * 		void	dumptree()
+ * 
+ * Private: 
+ * 		
+ * 		Node* 	root
+ * 		int 	nodechecked;
+ * 		int 	avlValue(Node* current)
+ * 		void 	computeAvlValues(Node*& current)
+ * 		int 	height(Node* current)
+ * 		void 	insertNode(Node *&current, Node *&newNode)
+ * 		void 	rotateleft(Node *&current)
+ * 		void 	rotateright(Ndde*&current)
+ * 		bool 	rightheavy(Node* current)
+ * 		bool 	leftheavy(Node* current)
+ * 		void 	dodumptree(Node* current)
+ * 
+ * Usage: 
+ * 		
+ * 		CMAVL List;     //creating list object
+ * 		List.insert(data) //adding item to list
+ * 		List.search("Mercedes") // searching the list of Car Model Mercedes
+ * 		List.GetNodes() // the number of nodes checked to finnd the laast thing
+ * 						// searched
+ * 		List.dumptree() // displays the tree
+ * 
+ */
 class CMAVL {
 	Node* root;
 	int nodeschecked;
@@ -2748,11 +3026,38 @@ public:
 	void dumptree();
 
 };
+/**
+ * Public: dumptree
+ * 
+ * Description
+ * 		Used to call the dodumptree private function
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void CMAVL::dumptree() {
 	cout << "---------------------------------" << endl;
 	cout << "Root:   " << root << "\n";
 	dodumptree(root);
 }
+/**
+ * Public: dodumptree
+ * 
+ * Description
+ * 		used to display all the elements in the tree and all their connected nodes
+ * 
+ * 
+ * Param:
+ *		Node*  current
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void CMAVL::dodumptree(Node* current) {
 	if (current) {
 		cout << "ADD:	" << current << endl
@@ -2767,12 +3072,53 @@ void CMAVL::dodumptree(Node* current) {
 
 	}
 }
+/**
+ * Public: CMAVL
+ * 
+ * Description
+ * 		Constructor
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 CMAVL::CMAVL() {
 	root = 0;
 	nodeschecked = 0;
 }
+
+/**
+ * Public: CMAVL
+ * 
+ * Description
+ * 		DeConstructor
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 CMAVL :: ~CMAVL() {
 }
+/**
+ * Private: insertNode
+ * 
+ * Description
+ * 		inserts data into the tree
+ * 
+ * Param:
+ *		Node *& 	currrent, 
+*		Node *& 	newNode
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void CMAVL::insertNode(Node*& current, Node*& newNode) {
 	if (current == nullptr) {
 		current = newNode;
@@ -2786,6 +3132,20 @@ void CMAVL::insertNode(Node*& current, Node*& newNode) {
 		insertNode(current->right, newNode);
 	}
 }
+/**
+ * Public: insert
+ * 
+ * Description
+ * 		calls the private insertNode function and compute all the avl values
+ * 		and performs the approipriate rotation
+ * 
+ * Param:
+ *		jsondata	data
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void CMAVL::insert(jsondata data) {
 	Node* newNode;
 	newNode = new Node;
@@ -2796,6 +3156,19 @@ void CMAVL::insert(jsondata data) {
 	insertNode(root, newNode);
 	computeAvlValues(root);
 }
+/**
+ * Public: search
+ * 
+ * Description
+ * 		locates all nodes needed to be checked to locate a piece of data 
+ * 
+ * Param:
+ *		int 	data
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 bool CMAVL::search(string data) {
 	Node* current = root;
 	while (current) {
@@ -2814,6 +3187,19 @@ bool CMAVL::search(string data) {
 	}
 	return false;
 }
+/**
+ * Public: height
+ * 
+ * Description
+ * 		calculates the height of the tree 
+ * 
+ * Param:
+ *		Node* 	current
+ * 
+ * Return 
+ * 		int	 : 	the height of the tree
+ * 
+ */
 int CMAVL::height(Node* current) {
 	int left_height = 0;
 	int right_height = 0;
@@ -2831,9 +3217,36 @@ int CMAVL::height(Node* current) {
 		return 1 + right_height;
 	}
 }
+/**
+ * Private: avlValue
+ * 
+ * Description
+ * 		calculates the avl value of a node 
+ * 
+ * Param:
+ *		Node* 	current
+ * 
+ * Return 
+ * 		int	 : 	the avl value
+ * 
+ */
 int CMAVL::avlValue(Node* current) {
 	return height(current->right) - height(current->left);
 }
+/**
+ * Private: computeAvlValues
+ * 
+ * Description
+ * 		gets the avl values and performs the approipriate
+ * 		rotations neccesary
+ * 
+ * Param:
+ *		Node	*&current
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void CMAVL::computeAvlValues(Node*& current) {
 	if (current) {
 		computeAvlValues(current->left);
@@ -2847,6 +3260,19 @@ void CMAVL::computeAvlValues(Node*& current) {
 		}
 	}
 }
+/**
+ * Private: rotateleft
+ * 
+ * Description
+ * 		performs a left rotation on a given node
+ * 
+ * Param:
+ *		Node	*&Subroot
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void CMAVL::rotateleft(Node*& Subroot) {
 	if (lefftheavy(Subroot->right)) {
 		rotateright(Subroot->right);
@@ -2859,6 +3285,19 @@ void CMAVL::rotateleft(Node*& Subroot) {
 
 	computeAvlValues(Subroot);
 }
+/**
+ * Private: rotateright
+ * 
+ * Description
+ * 		performs a right rotation on a given node
+ * 
+ * Param:
+ *		Node	*&Subroot
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void CMAVL::rotateright(Node*& Subroot) {
 	if (rightheavy(Subroot->left)) {
 		rotateleft(Subroot->left);
@@ -2871,12 +3310,52 @@ void CMAVL::rotateright(Node*& Subroot) {
 
 	computeAvlValues(Subroot);
 }
+/**
+ * Private: leftheavy
+ * 
+ * Description
+ * 		checks if a tree is scewed more the left
+ * 
+ * Param:
+ *		Node	*current
+ * 
+ * Return 
+ * 		bool  : true or false
+ * 
+ */
 bool CMAVL::lefftheavy(Node* current) {
 	return height(current->left) > height(current->right);
 }
+/**
+ * Private: rigthheavy
+ * 
+ * Description
+ * 		checks if a tree is scewed more the right
+ * 
+ * Param:
+ *		Node	*current
+ * 
+ * Return 
+ * 		bool  : true or false
+ * 
+ */
 bool CMAVL::rightheavy(Node* current) {
 	return height(current->right) > height(current->left);
 }
+/**
+ * Public: 	GetNodes
+ * 
+ * Description
+ * 		returns the number of nodes checked to find a node containing
+ * 		the last piece of data searched for
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		int  : the number of nodes checked
+ * 
+ */
 int CMAVL::GetNodes() {
 	return nodeschecked;
 }
