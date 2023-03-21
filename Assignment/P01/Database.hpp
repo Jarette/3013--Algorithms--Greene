@@ -774,13 +774,14 @@ void FNAVL::insertNode(Node*& current, Node*& newNode) {
 	}
 }
 /**
- * Public: search
+ * Public: insert
  * 
  * Description
- * 		locates all nodes needed to be checked to locate a piece of data 
+ * 		calls the private insertNode function and compute all the avl values
+ * 		and performs the approipriate rotation
  * 
  * Param:
- *		int 	data
+ *		jsondata	data
  * 
  * Return 
  * 		N/A
@@ -999,6 +1000,45 @@ bool FNAVL::rightheavy(Node* current) {
 int FNAVL::GetNodes() {
 	return nodeschecked;
 }
+/**
+ * LNAVL
+ * 
+ * Description:
+ * 		An AVL tree that uses the Last Name field of the data as the main key for 
+ * 		inseritng and searching.
+ * 	
+ * Public Methods:
+ * 				LNAVL()
+ * 				~LNAVL()
+ * 		void 	insert(jsondata)
+ * 		bool	search(int)
+ * 		int 	GetNodes()
+ * 		void	dumptree()
+ * 
+ * Private: 
+ * 		
+ * 		Node* 	root
+ * 		int 	nodechecked;
+ * 		int 	avlValue(Node* current)
+ * 		void 	computeAvlValues(Node*& current)
+ * 		int 	height(Node* current)
+ * 		void 	insertNode(Node *&current, Node *&newNode)
+ * 		void 	rotateleft(Node *&current)
+ * 		void 	rotateright(Ndde*&current)
+ * 		bool 	rightheavy(Node* current)
+ * 		bool 	leftheavy(Node* current)
+ * 		void 	dodumptree(Node* current)
+ * 
+ * Usage: 
+ * 		
+ * 		FNAVL List;     //creating list object
+ * 		List.insert(data) //adding item to list
+ * 		List.search("Hailey") // searching the list of first name Hailey
+ * 		List.GetNodes() // the number of nodes checked to finnd the laast thing
+ * 						// searched
+ * 		List.dumptree() // displays the tree
+ * 
+ */
 class LNAVL {
 	Node* root;
 	int nodeschecked;
@@ -1021,11 +1061,38 @@ public:
 	void dumptree();
 
 };
+/**
+ * Public: dumptree
+ * 
+ * Description
+ * 		Used to call the dodumptree private function
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void LNAVL::dumptree() {
 	cout << "---------------------------------" << endl;
 	cout << "Root:   " << root << "\n";
 	dodumptree(root);
 }
+/**
+ * Public: dodumptree
+ * 
+ * Description
+ * 		used to display all the elements in the tree and all their connected nodes
+ * 
+ * 
+ * Param:
+ *		Node*  current
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void LNAVL::dodumptree(Node* current) {
 	if (current) {
 		cout << "ADD:	" << current << endl
@@ -1039,13 +1106,53 @@ void LNAVL::dodumptree(Node* current) {
 		dodumptree(current->right);
 
 	}
-}
+}/**
+ * Public: LNAVL
+ * 
+ * Description
+ * 		Deconstructor
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 LNAVL::LNAVL() {
 	root = 0;
 	nodeschecked = 0;
 }
+/**
+ * Public: LNAVL
+ * 
+ * Description
+ * 		Deconstructor
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 LNAVL :: ~LNAVL() {
 }
+/**
+ * Private: insertNode
+ * 
+ * Description
+ * 		inserts data into the tree
+ * 
+ * Param:
+ *		Node *& 	currrent, 
+*		Node *& 	newNode
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
+
 void LNAVL::insertNode(Node*& current, Node*& newNode) {
 	if (current == nullptr) {
 		current = newNode;
@@ -1059,6 +1166,20 @@ void LNAVL::insertNode(Node*& current, Node*& newNode) {
 		insertNode(current->right, newNode);
 	}
 }
+/**
+ * Public: insert
+ * 
+ * Description
+ * 		calls the private insertNode function and compute all the avl values
+ * 		and performs the approipriate rotation
+ * 
+ * Param:
+ *		jsondata	data
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void LNAVL::insert(jsondata data) {
 	Node* newNode;
 	newNode = new Node;
@@ -1069,6 +1190,19 @@ void LNAVL::insert(jsondata data) {
 	insertNode(root, newNode);
 	computeAvlValues(root);
 }
+/**
+ * Public: search
+ * 
+ * Description
+ * 		locates all nodes needed to be checked to locate a piece of data 
+ * 
+ * Param:
+ *		int 	data
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 bool LNAVL::search(string data) {
 	Node* current = root;
 	while (current) {
@@ -1087,6 +1221,19 @@ bool LNAVL::search(string data) {
 	}
 	return false;
 }
+/**
+ * Public: height
+ * 
+ * Description
+ * 		calculates the height of the tree 
+ * 
+ * Param:
+ *		Node* 	current
+ * 
+ * Return 
+ * 		int	 : 	the height of the tree
+ * 
+ */
 int LNAVL::height(Node* current) {
 	int left_height = 0;
 	int right_height = 0;
@@ -1104,9 +1251,36 @@ int LNAVL::height(Node* current) {
 		return 1 + right_height;
 	}
 }
+/**
+ * Private: avlValue
+ * 
+ * Description
+ * 		calculates the avl value of a node 
+ * 
+ * Param:
+ *		Node* 	current
+ * 
+ * Return 
+ * 		int	 : 	the avl value
+ * 
+ */
 int LNAVL::avlValue(Node* current) {
 	return height(current->right) - height(current->left);
 }
+/**
+ * Private: computeAvlValues
+ * 
+ * Description
+ * 		gets the avl values and performs the approipriate
+ * 		rotations neccesary
+ * 
+ * Param:
+ *		Node	*&current
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void LNAVL::computeAvlValues(Node*& current) {
 	if (current) {
 		computeAvlValues(current->left);
@@ -1120,6 +1294,19 @@ void LNAVL::computeAvlValues(Node*& current) {
 		}
 	}
 }
+/**
+ * Private: rotateleft
+ * 
+ * Description
+ * 		performs a left rotation on a given node
+ * 
+ * Param:
+ *		Node	*&Subroot
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void LNAVL::rotateleft(Node*& Subroot) {
 	if (lefftheavy(Subroot->right)) {
 		rotateright(Subroot->right);
@@ -1132,6 +1319,19 @@ void LNAVL::rotateleft(Node*& Subroot) {
 
 	computeAvlValues(Subroot);
 }
+/**
+ * Private: rotateright
+ * 
+ * Description
+ * 		performs a right rotation on a given node
+ * 
+ * Param:
+ *		Node	*&Subroot
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void LNAVL::rotateright(Node*& Subroot) {
 	if (rightheavy(Subroot->left)) {
 		rotateleft(Subroot->left);
@@ -1144,15 +1344,94 @@ void LNAVL::rotateright(Node*& Subroot) {
 
 	computeAvlValues(Subroot);
 }
+/**
+ * Private: leftheavy
+ * 
+ * Description
+ * 		checks if a tree is scewed more the left
+ * 
+ * Param:
+ *		Node	*current
+ * 
+ * Return 
+ * 		bool  : true or false
+ * 
+ */
 bool LNAVL::lefftheavy(Node* current) {
 	return height(current->left) > height(current->right);
 }
+/**
+ * Private: rigthheavy
+ * 
+ * Description
+ * 		checks if a tree is scewed more the right
+ * 
+ * Param:
+ *		Node	*current
+ * 
+ * Return 
+ * 		bool  : true or false
+ * 
+ */
 bool LNAVL::rightheavy(Node* current) {
 	return height(current->right) > height(current->left);
 }
+/**
+ * Public: 	GetNodes
+ * 
+ * Description
+ * 		returns the number of nodes checked to find a node containing
+ * 		the last piece of data searched for
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		int  : the number of nodes checked
+ * 
+ */
 int LNAVL::GetNodes() {
 	return nodeschecked;
 }
+/**
+ * EMAVL
+ * 
+ * Description:
+ * 		An AVL tree that uses the Email field of the data as the main key for 
+ * 		inseritng and searching.
+ * 	
+ * Public Methods:
+ * 				EMAVL()
+ * 				~EMAVL()
+ * 		void 	insert(jsondata)
+ * 		bool	search(int)
+ * 		int 	GetNodes()
+ * 		void	dumptree()
+ * 
+ * Private: 
+ * 		
+ * 		Node* 	root
+ * 		int 	nodechecked;
+ * 		int 	avlValue(Node* current)
+ * 		void 	computeAvlValues(Node*& current)
+ * 		int 	height(Node* current)
+ * 		void 	insertNode(Node *&current, Node *&newNode)
+ * 		void 	rotateleft(Node *&current)
+ * 		void 	rotateright(Ndde*&current)
+ * 		bool 	rightheavy(Node* current)
+ * 		bool 	leftheavy(Node* current)
+ * 		void 	dodumptree(Node* current)
+ * 
+ * Usage: 
+ * 		
+ * 		FNAVL List;     //creating list object
+ * 		List.insert(data) //adding item to list
+ * 		List.search("jarettegreene09@gmail.com") // searching the list of Email jarettegreene09@gmail.com
+ * 		List.GetNodes() // the number of nodes checked to finnd the laast thing
+ * 						// searched
+ * 		List.dumptree() // displays the tree
+ * 
+ */
 class EMAVL {
 	Node* root;
 	int nodeschecked;
@@ -1175,6 +1454,19 @@ public:
 	void dumptree();
 
 };
+/**
+ * Public: dumptree
+ * 
+ * Description
+ * 		Used to call the dodumptree private function
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void EMAVL::dumptree() {
 	cout << "---------------------------------" << endl;
 	cout << "Root:   " << root << "\n";
