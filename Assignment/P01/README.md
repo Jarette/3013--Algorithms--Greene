@@ -37,34 +37,33 @@
 - display the time it took to search 
 
 - Example Command:
-'''
-    // loading data into vector
-    vector <jsondata> data; 					
-	ifstream A("random_person_data_01.json"); 	
-	json filea = json::parse(A);				
-	Loaddata(filea, data);	
 
-    // filling data into linked list and database
-    for (int i = 0; i < data.size(); i++) {      
+    
+        vector <jsondata> data; 		    // loading data into vector			
+	    ifstream A("random_person_data_01.json"); 	
+	    json filea = json::parse(A);				
+	    Loaddata(filea, data);	
+
+        // filling data into linked list and database
+         for (int i = 0; i < data.size(); i++) {      
 		SLL.Insert(data[i]);
-	}
-	cout << "Finished filling Linked List " << endl;
-	Database Dbase(data);   			
+	    }
+	    cout << "Finished filling Linked List " << endl;
+	    Database Dbase(data);   			
 
-    // checking tie to search for data in database
-    T.Start();
-	found = Dbase.FindID(72532);
-	T.End();
-	seconds = T.Seconds();
-	Milliseconds = T.MilliSeconds();
-	if (found) {
+        // checking tie to search for data in database
+        T.Start();
+	    found = Dbase.FindID(72532);
+	    T.End();
+	    seconds = T.Seconds();
+	    Milliseconds = T.MilliSeconds();
+	    if (found) {
 		cout << "Found the ID#: 72532 after checking " << Dbase.GetIDnodes() << "in AVL tree " << endl;
 		cout << "Taking " << seconds << " seconds or " << Milliseconds << " milliseconds " << endl;
 		cout << endl;
-	}
-	else {
+	    }
+	    else {
 		cout << "Data not found";
 		cout << endl;
 		cout << endl;
-	}
-'''
+	    }
