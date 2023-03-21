@@ -13,12 +13,12 @@
 |   #   | File             | Description                                        |
 | :---: | ---------------  | -------------------------------------------------- |
 |   1   | [Source.cpp](https://github.com/Jarette/3013--Algorithms--Greene/blob/main/Assignment/P01/Source.cpp)| Main driver.|
-|   1   | [Database.hpp](https://github.com/Jarette/3013--Algorithms--Greene/blob/main/Assignment/P01/Database.hpp)| Contains a Database class that stores 8 different AVL trees.|
-|   1   | [Json.hpp](https://github.com/Jarette/3013--Algorithms--Greene/blob/main/Assignment/P01/json.hpp)|Contains a Database class that stores |
-|   1   | [SLList.hpp](https://github.com/Jarette/3013--Algorithms--Greene/blob/main/Assignment/P01/SLList.hpp)| Contains singly Linked List|
-|   1   | [Timer.hpp](https://github.com/Jarette/3013--Algorithms--Greene/blob/main/Assignment/P01/Timer.hpp)| Timer class used to track the time used to run functions|
-|   1   | [random_person_data_01.json](https://github.com/Jarette/3013--Algorithms--Greene/blob/main/Assignment/P01/random_person_data_01.json)|json file containing all data|
-|   1   | [Output.txt](https://github.com/Jarette/3013--Algorithms--Greene/blob/main/Assignment/P01/Output.txt)|Example output file|
+|   2   | [Database.hpp](https://github.com/Jarette/3013--Algorithms--Greene/blob/main/Assignment/P01/Database.hpp)| Contains a Database class that stores 8 different AVL trees.|
+|   3   | [Json.hpp](https://github.com/Jarette/3013--Algorithms--Greene/blob/main/Assignment/P01/json.hpp)|Contains a Database class that stores |
+|   4   | [SLList.hpp](https://github.com/Jarette/3013--Algorithms--Greene/blob/main/Assignment/P01/SLList.hpp)| Contains singly Linked List|
+|   5   | [Timer.hpp](https://github.com/Jarette/3013--Algorithms--Greene/blob/main/Assignment/P01/Timer.hpp)| Timer class used to track the time used to run functions|
+|   6   | [random_person_data_01.json](https://github.com/Jarette/3013--Algorithms--Greene/blob/main/Assignment/P01/random_person_data_01.json)|json file containing all data|
+|   7   | [Output.txt](https://github.com/Jarette/3013--Algorithms--Greene/blob/main/Assignment/P01/Output.txt)|Example output file|
 
 
 
