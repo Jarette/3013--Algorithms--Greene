@@ -18,6 +18,8 @@
 |   1   | [SLList.hpp](https://github.com/Jarette/3013--Algorithms--Greene/blob/main/Assignment/P01/SLList.hpp)| Contains singly Linked List|
 |   1   | [Timer.hpp](https://github.com/Jarette/3013--Algorithms--Greene/blob/main/Assignment/P01/Timer.hpp)| Timer class used to track the time used to run functions|
 |   1   | [random_person_data_01.json](https://github.com/Jarette/3013--Algorithms--Greene/blob/main/Assignment/P01/random_person_data_01.json)|json file containing all data|
+|   1   | [Output.txt](https://github.com/Jarette/3013--Algorithms--Greene/blob/main/Assignment/P01/Output.txt)|Example output file|
+
 
 
 ### Instructions
@@ -35,7 +37,7 @@
 - display the time it took to search 
 
 - Example Command:
-
+'''
     // loading data into vector
     vector <jsondata> data; 					
 	ifstream A("random_person_data_01.json"); 	
@@ -65,3 +67,4 @@
 		cout << endl;
 		cout << endl;
 	}
+'''
