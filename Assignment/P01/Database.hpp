@@ -1110,7 +1110,7 @@ void LNAVL::dodumptree(Node* current) {
  * Public: LNAVL
  * 
  * Description
- * 		Deconstructor
+ * 		Constructor
  * 
  * Param:
  *		N/A
@@ -1472,6 +1472,20 @@ void EMAVL::dumptree() {
 	cout << "Root:   " << root << "\n";
 	dodumptree(root);
 }
+/**
+ * Public: dodumptree
+ * 
+ * Description
+ * 		used to display all the elements in the tree and all their connected nodes
+ * 
+ * 
+ * Param:
+ *		Node*  current
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void EMAVL::dodumptree(Node* current) {
 	if (current) {
 		cout << "ADD:	" << current << endl
@@ -1486,12 +1500,52 @@ void EMAVL::dodumptree(Node* current) {
 
 	}
 }
+/**
+ * Public: EMAVL
+ * 
+ * Description
+ * 		Constructor
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 EMAVL::EMAVL() {
 	root = 0;
 	nodeschecked = 0;
 }
+/**
+ * Public: EMAVL
+ * 
+ * Description
+ * 		Deconstructor
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 EMAVL :: ~EMAVL() {
 }
+/**
+ * Private: insertNode
+ * 
+ * Description
+ * 		inserts data into the tree
+ * 
+ * Param:
+ *		Node *& 	currrent, 
+*		Node *& 	newNode
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void EMAVL::insertNode(Node*& current, Node*& newNode) {
 	if (current == nullptr) {
 		current = newNode;
@@ -1505,6 +1559,20 @@ void EMAVL::insertNode(Node*& current, Node*& newNode) {
 		insertNode(current->right, newNode);
 	}
 }
+/**
+ * Public: insert
+ * 
+ * Description
+ * 		calls the private insertNode function and compute all the avl values
+ * 		and performs the approipriate rotation
+ * 
+ * Param:
+ *		jsondata	data
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void EMAVL::insert(jsondata data) {
 	Node* newNode;
 	newNode = new Node;
@@ -1515,6 +1583,19 @@ void EMAVL::insert(jsondata data) {
 	insertNode(root, newNode);
 	computeAvlValues(root);
 }
+/**
+ * Public: search
+ * 
+ * Description
+ * 		locates all nodes needed to be checked to locate a piece of data 
+ * 
+ * Param:
+ *		int 	data
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 bool EMAVL::search(string data) {
 	Node* current = root;
 	while (current) {
@@ -1533,6 +1614,19 @@ bool EMAVL::search(string data) {
 	}
 	return false;
 }
+/**
+ * Public: height
+ * 
+ * Description
+ * 		calculates the height of the tree 
+ * 
+ * Param:
+ *		Node* 	current
+ * 
+ * Return 
+ * 		int	 : 	the height of the tree
+ * 
+ */
 int EMAVL::height(Node* current) {
 	int left_height = 0;
 	int right_height = 0;
@@ -1550,9 +1644,36 @@ int EMAVL::height(Node* current) {
 		return 1 + right_height;
 	}
 }
+/**
+ * Private: avlValue
+ * 
+ * Description
+ * 		calculates the avl value of a node 
+ * 
+ * Param:
+ *		Node* 	current
+ * 
+ * Return 
+ * 		int	 : 	the avl value
+ * 
+ */
 int EMAVL::avlValue(Node* current) {
 	return height(current->right) - height(current->left);
 }
+/**
+ * Private: computeAvlValues
+ * 
+ * Description
+ * 		gets the avl values and performs the approipriate
+ * 		rotations neccesary
+ * 
+ * Param:
+ *		Node	*&current
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void EMAVL::computeAvlValues(Node*& current) {
 	if (current) {
 		computeAvlValues(current->left);
@@ -1566,6 +1687,19 @@ void EMAVL::computeAvlValues(Node*& current) {
 		}
 	}
 }
+/**
+ * Private: rotateleft
+ * 
+ * Description
+ * 		performs a left rotation on a given node
+ * 
+ * Param:
+ *		Node	*&Subroot
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void EMAVL::rotateleft(Node*& Subroot) {
 	if (lefftheavy(Subroot->right)) {
 		rotateright(Subroot->right);
@@ -1578,6 +1712,19 @@ void EMAVL::rotateleft(Node*& Subroot) {
 
 	computeAvlValues(Subroot);
 }
+/**
+ * Private: rotateright
+ * 
+ * Description
+ * 		performs a right rotation on a given node
+ * 
+ * Param:
+ *		Node	*&Subroot
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void EMAVL::rotateright(Node*& Subroot) {
 	if (rightheavy(Subroot->left)) {
 		rotateleft(Subroot->left);
@@ -1590,15 +1737,94 @@ void EMAVL::rotateright(Node*& Subroot) {
 
 	computeAvlValues(Subroot);
 }
+/**
+ * Private: leftheavy
+ * 
+ * Description
+ * 		checks if a tree is scewed more the left
+ * 
+ * Param:
+ *		Node	*current
+ * 
+ * Return 
+ * 		bool  : true or false
+ * 
+ */
 bool EMAVL::lefftheavy(Node* current) {
 	return height(current->left) > height(current->right);
 }
+/**
+ * Private: rigthheavy
+ * 
+ * Description
+ * 		checks if a tree is scewed more the right
+ * 
+ * Param:
+ *		Node	*current
+ * 
+ * Return 
+ * 		bool  : true or false
+ * 
+ */
 bool EMAVL::rightheavy(Node* current) {
 	return height(current->right) > height(current->left);
 }
+/**
+ * Public: 	GetNodes
+ * 
+ * Description
+ * 		returns the number of nodes checked to find a node containing
+ * 		the last piece of data searched for
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		int  : the number of nodes checked
+ * 
+ */
 int EMAVL::GetNodes() {
 	return nodeschecked;
 }
+/**
+ * EMAVL
+ * 
+ * Description:
+ * 		An AVL tree that uses the Phone number field of the data as the main key for 
+ * 		inseritng and searching.
+ * 	
+ * Public Methods:
+ * 				PHAVL()
+ * 				~PHAVL()
+ * 		void 	insert(jsondata)
+ * 		bool	search(int)
+ * 		int 	GetNodes()
+ * 		void	dumptree()
+ * 
+ * Private: 
+ * 		
+ * 		Node* 	root
+ * 		int 	nodechecked;
+ * 		int 	avlValue(Node* current)
+ * 		void 	computeAvlValues(Node*& current)
+ * 		int 	height(Node* current)
+ * 		void 	insertNode(Node *&current, Node *&newNode)
+ * 		void 	rotateleft(Node *&current)
+ * 		void 	rotateright(Ndde*&current)
+ * 		bool 	rightheavy(Node* current)
+ * 		bool 	leftheavy(Node* current)
+ * 		void 	dodumptree(Node* current)
+ * 
+ * Usage: 
+ * 		
+ * 		FNAVL List;     //creating list object
+ * 		List.insert(data) //adding item to list
+ * 		List.search("jarettegreene09@gmail.com") // searching the list of Email jarettegreene09@gmail.com
+ * 		List.GetNodes() // the number of nodes checked to finnd the laast thing
+ * 						// searched
+ * 		List.dumptree() // displays the tree
+ * 
+ */
 class PHAVL {
 	Node* root;
 	int nodeschecked;
