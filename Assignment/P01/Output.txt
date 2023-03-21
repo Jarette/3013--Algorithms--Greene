@@ -1,0 +1,59 @@
+Finished Loading to vector
+Finished filling Linked List
+finished loading ID
+finished loading FN
+finished loading LN
+finished loading EM
+finished loading PH
+finished loading AD
+finished loading JT
+finished loading CM
+Finished filling Database (AVL trees)
+
+Found the ID#: 72532 after checking 17in AVL tree
+Taking 0.0008463 seconds or 0 milliseconds
+
+Found the ID#: 72532 after checking 72532in Linked List
+Taking 0.0536682 seconds or 53 milliseconds
+
+Found the First name: Pancho after checking 9in AVL tree
+Taking 0.0005791 seconds or 0 milliseconds
+
+Found the First name Pancho after checking 2520in Linked List
+Taking 0.0002474 seconds or 0 milliseconds
+
+Found the Last name: Klimsch after checking 11in AVL tree
+Taking 0.0005419 seconds or 0 milliseconds
+
+Found the Last name: Klimsch after checking 23637in Linked List
+Taking 0.0022234 seconds or 2 milliseconds
+
+Found the Email: dstrattana@diigo.com after checking 18in AVL tree
+Taking 0.0018232 seconds or 1 milliseconds
+
+Found the Email: dstrattana@diigo.com after checking 11in Linked List
+Taking 0.0001001 seconds or 0 milliseconds
+
+Found the Phone Number: (619) 1599292 after checking 14in AVL tree
+Taking 0.0008038 seconds or 0 milliseconds
+
+Found the Phone Number: (619) 1599292 after checking 70000in Linked List
+Taking 0.0066407 seconds or 6 milliseconds
+
+Found the Address: 6 Sunbrook Plaza after checking 17in AVL tree
+Taking 0.0010636 seconds or 1 milliseconds
+
+Found the Address: 6 Sunbrook Plaza after checking 30200in Linked List
+Taking 0.0132034 seconds or 13 milliseconds
+
+Found the Job Title: Programmer Analyst III after checking 5in AVL tree
+Taking 1.85e-05 seconds or 0 milliseconds
+
+Found the Job Title: Programmer Analyst III checking 123in Linked List
+Taking 1.98e-05 seconds or 0 milliseconds
+
+Found the Car Model: Range Rover after checking 6in AVL tree
+Taking 3.7e-06 seconds or 0 milliseconds
+
+Found the Car Model: Range Rover checking 152in Linked List
+Taking 1.25e-05 seconds or 0 milliseconds
