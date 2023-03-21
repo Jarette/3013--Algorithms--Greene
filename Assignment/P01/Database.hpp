@@ -9,9 +9,9 @@
 * 
 *  Description:
 *        This header file contains the Binary Search trees used to create a the 
-*        the database used in the main.cpp file. The Binary search trees in this 
+*        the database used in the main.cpp file. The AVL trees in this 
 *        program all accepts data from a Json file stored in a vector of structs. This file
-*        contains 9 binary search trees with each searching using a different key
+*        contains 8 binary search trees with each searching using a different key
 *        (ID, First Name, Last Name, Email, Phone, Address, Job Title and 
 *         Car Model). Then places all these trees as attributes in a Database where 
 *         the user can access the tree based on what what type of data they would 
