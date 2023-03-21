@@ -1787,7 +1787,7 @@ int EMAVL::GetNodes() {
 	return nodeschecked;
 }
 /**
- * EMAVL
+ * PHAVL
  * 
  * Description:
  * 		An AVL tree that uses the Phone number field of the data as the main key for 
@@ -1819,7 +1819,7 @@ int EMAVL::GetNodes() {
  * 		
  * 		FNAVL List;     //creating list object
  * 		List.insert(data) //adding item to list
- * 		List.search("jarettegreene09@gmail.com") // searching the list of Email jarettegreene09@gmail.com
+ * 		List.search("(940) 7421213") // searching the list of Phone Number (940) 7421213
  * 		List.GetNodes() // the number of nodes checked to finnd the laast thing
  * 						// searched
  * 		List.dumptree() // displays the tree
@@ -2179,6 +2179,45 @@ bool PHAVL::rightheavy(Node* current) {
 int PHAVL::GetNodes() {
 	return nodeschecked;
 }
+/**
+ * ADAVL
+ * 
+ * Description:
+ * 		An AVL tree that uses the Address field of the data as the main key for 
+ * 		inseritng and searching.
+ * 	
+ * Public Methods:
+ * 				ADAVL()
+ * 				~ADAVL()
+ * 		void 	insert(jsondata)
+ * 		bool	search(int)
+ * 		int 	GetNodes()
+ * 		void	dumptree()
+ * 
+ * Private: 
+ * 		
+ * 		Node* 	root
+ * 		int 	nodechecked;
+ * 		int 	avlValue(Node* current)
+ * 		void 	computeAvlValues(Node*& current)
+ * 		int 	height(Node* current)
+ * 		void 	insertNode(Node *&current, Node *&newNode)
+ * 		void 	rotateleft(Node *&current)
+ * 		void 	rotateright(Ndde*&current)
+ * 		bool 	rightheavy(Node* current)
+ * 		bool 	leftheavy(Node* current)
+ * 		void 	dodumptree(Node* current)
+ * 
+ * Usage: 
+ * 		
+ * 		FNAVL List;     //creating list object
+ * 		List.insert(data) //adding item to list
+ * 		List.search("Comanche Suite") // searching the list of Address Comanche Suite
+ * 		List.GetNodes() // the number of nodes checked to finnd the laast thing
+ * 						// searched
+ * 		List.dumptree() // displays the tree
+ * 
+ */
 class ADAVL {
 	Node* root;
 	int nodeschecked;
@@ -2201,11 +2240,38 @@ public:
 	void dumptree();
 
 };
+/**
+ * Public: dumptree
+ * 
+ * Description
+ * 		Used to call the dodumptree private function
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void ADAVL::dumptree() {
 	cout << "---------------------------------" << endl;
 	cout << "Root:   " << root << "\n";
 	dodumptree(root);
 }
+/**
+ * Public: dodumptree
+ * 
+ * Description
+ * 		used to display all the elements in the tree and all their connected nodes
+ * 
+ * 
+ * Param:
+ *		Node*  current
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void ADAVL::dodumptree(Node* current) {
 	if (current) {
 		cout << "ADD:	" << current << endl
@@ -2220,12 +2286,52 @@ void ADAVL::dodumptree(Node* current) {
 
 	}
 }
+/**
+ * Public: ADAVL
+ * 
+ * Description
+ * 		Constructor
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 ADAVL::ADAVL() {
 	root = 0;
 	nodeschecked = 0;
 }
+/**
+ * Public: ADAVL
+ * 
+ * Description
+ * 		DeConstructor
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 ADAVL :: ~ADAVL() {
 }
+/**
+ * Private: insertNode
+ * 
+ * Description
+ * 		inserts data into the tree
+ * 
+ * Param:
+ *		Node *& 	currrent, 
+*		Node *& 	newNode
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void ADAVL::insertNode(Node*& current, Node*& newNode) {
 	if (current == nullptr) {
 		current = newNode;
@@ -2239,6 +2345,20 @@ void ADAVL::insertNode(Node*& current, Node*& newNode) {
 		insertNode(current->right, newNode);
 	}
 }
+/**
+ * Public: insert
+ * 
+ * Description
+ * 		calls the private insertNode function and compute all the avl values
+ * 		and performs the approipriate rotation
+ * 
+ * Param:
+ *		jsondata	data
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void ADAVL::insert(jsondata data) {
 	Node* newNode;
 	newNode = new Node;
@@ -2249,6 +2369,19 @@ void ADAVL::insert(jsondata data) {
 	insertNode(root, newNode);
 	computeAvlValues(root);
 }
+/**
+ * Public: search
+ * 
+ * Description
+ * 		locates all nodes needed to be checked to locate a piece of data 
+ * 
+ * Param:
+ *		int 	data
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 bool ADAVL::search(string data) {
 	Node* current = root;
 	while (current) {
@@ -2267,6 +2400,19 @@ bool ADAVL::search(string data) {
 	}
 	return false;
 }
+/**
+ * Public: height
+ * 
+ * Description
+ * 		calculates the height of the tree 
+ * 
+ * Param:
+ *		Node* 	current
+ * 
+ * Return 
+ * 		int	 : 	the height of the tree
+ * 
+ */
 int ADAVL::height(Node* current) {
 	int left_height = 0;
 	int right_height = 0;
@@ -2284,9 +2430,36 @@ int ADAVL::height(Node* current) {
 		return 1 + right_height;
 	}
 }
+/**
+ * Private: avlValue
+ * 
+ * Description
+ * 		calculates the avl value of a node 
+ * 
+ * Param:
+ *		Node* 	current
+ * 
+ * Return 
+ * 		int	 : 	the avl value
+ * 
+ */
 int ADAVL::avlValue(Node* current) {
 	return height(current->right) - height(current->left);
 }
+/**
+ * Private: computeAvlValues
+ * 
+ * Description
+ * 		gets the avl values and performs the approipriate
+ * 		rotations neccesary
+ * 
+ * Param:
+ *		Node	*&current
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void ADAVL::computeAvlValues(Node*& current) {
 	if (current) {
 		computeAvlValues(current->left);
@@ -2300,6 +2473,19 @@ void ADAVL::computeAvlValues(Node*& current) {
 		}
 	}
 }
+/**
+ * Private: rotateleft
+ * 
+ * Description
+ * 		performs a left rotation on a given node
+ * 
+ * Param:
+ *		Node	*&Subroot
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void ADAVL::rotateleft(Node*& Subroot) {
 	if (lefftheavy(Subroot->right)) {
 		rotateright(Subroot->right);
@@ -2312,6 +2498,19 @@ void ADAVL::rotateleft(Node*& Subroot) {
 
 	computeAvlValues(Subroot);
 }
+/**
+ * Private: rotateright
+ * 
+ * Description
+ * 		performs a right rotation on a given node
+ * 
+ * Param:
+ *		Node	*&Subroot
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void ADAVL::rotateright(Node*& Subroot) {
 	if (rightheavy(Subroot->left)) {
 		rotateleft(Subroot->left);
@@ -2324,12 +2523,52 @@ void ADAVL::rotateright(Node*& Subroot) {
 
 	computeAvlValues(Subroot);
 }
+/**
+ * Private: leftheavy
+ * 
+ * Description
+ * 		checks if a tree is scewed more the left
+ * 
+ * Param:
+ *		Node	*current
+ * 
+ * Return 
+ * 		bool  : true or false
+ * 
+ */
 bool ADAVL::lefftheavy(Node* current) {
 	return height(current->left) > height(current->right);
 }
+/**
+ * Private: rigthheavy
+ * 
+ * Description
+ * 		checks if a tree is scewed more the right
+ * 
+ * Param:
+ *		Node	*current
+ * 
+ * Return 
+ * 		bool  : true or false
+ * 
+ */
 bool ADAVL::rightheavy(Node* current) {
 	return height(current->right) > height(current->left);
 }
+/**
+ * Public: 	GetNodes
+ * 
+ * Description
+ * 		returns the number of nodes checked to find a node containing
+ * 		the last piece of data searched for
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		int  : the number of nodes checked
+ * 
+ */
 int ADAVL::GetNodes() {
 	return nodeschecked;
 }
