@@ -3368,6 +3368,7 @@ int CMAVL::GetNodes() {
  * 	
  * Public Methods:
  * 					Database (vector<jsondata>data) 
+ * 					~Database()
  * 			bool	FindID(int data) 
  *			int 	GetIDnodes() 
  *			bool 	FindFN(string data) 
@@ -3406,15 +3407,28 @@ int CMAVL::GetNodes() {
  */
 class Database {
 private:
-	IDAVL List1;
-	FNAVL List2;
-	LNAVL List3;
-	EMAVL List4;
-	PHAVL List5;
-	ADAVL List6;
-	JTAVL List7;
-	CMAVL List8;
+	IDAVL List1; // ID based AVL Tree
+	FNAVL List2; //First name based AVL Tree 
+	LNAVL List3; // Last Name based AVL Tree
+	EMAVL List4; // Email based AVL Tree 
+	PHAVL List5; //Phone number based AVL tree
+	ADAVL List6; //Address based AVL tree	
+	JTAVL List7; // Job Title based AVL tree	
+	CMAVL List8; //Car Model based AVL tree
 public:
+/**
+ * Public: Database
+ * 
+ * Description
+ * 		constructor that accepts a vector of items and loads it into the Database
+ * 
+ * Param:
+ *		vector <jsondata> 
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 	Database(vector<jsondata>data) {
 		int n = 0;
 		swap(data[0], data[49999]);
@@ -3486,26 +3500,267 @@ public:
 		}
 		cout << "finished loading CM" << endl;
 	}
+/**
+ * Public: Database
+ * 
+ * Description
+ * 		Deconstructor 
+ * 
+ * Param:
+ *		vector <jsondata> 
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 	~Database() {
 
 	}
+/**
+ * Public: FindID
+ * 
+ * Description
+ * 		Locates the ID# passed in to the function inside the list
+ * 
+ * Param:
+ *		int		data
+ * 
+ * Return 
+ * 		bool  : true or false
+ * 
+ */
 	bool FindID(int data) { return List1.search(data); }
+/**
+ * Public: GetIDnodes
+ * 
+ * Description
+ * 		gets the number of nodes that have to checked to to find the 
+ * 		last ID searched
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		int	: the number of nodes checked 
+ * 
+ */
 	int GetIDnodes() { return List1.GetNodes(); }
+/**
+ * Public: FindFN
+ * 
+ * Description
+ * 		Locates the First name passed in to the function inside the list
+ * 
+ * Param:
+ *		string		data
+ * 
+ * Return 
+ * 		bool:  true or false
+ * 
+ */
 	bool FindFN(string data) { return List2.search(data); }
+/**
+ * Public: GetFNnodes
+ * 
+ * Description
+ * 		gets the number of nodes that have to checked to to find the 
+ * 		last First Name searched
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		int	: the number of nodes checked 
+ * 
+ */
 	int GetFNnodes() { return List2.GetNodes(); }
+/**
+ * Public: FindLN
+ * 
+ * Description
+ * 		Locates the Last name passed in to the function inside the list
+ * 
+ * Param:
+ *		string		data
+ * 
+ * Return 
+ * 		bool:  true or false
+ * 
+ */
 	bool FindLN(string data) { return List3.search(data); }
+/**
+ * Public: GetLNnodes
+ * 
+ * Description
+ * 		gets the number of nodes that have to checked to to find the 
+ * 		last Last Name searched
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		int	: the number of nodes checked 
+ * 
+ */
 	int GetLNnodes() { return List3.GetNodes(); }
+/**
+ * Public: FindEM
+ * 
+ * Description
+ * 		Locates the Email passed in to the function inside the list
+ * 
+ * Param:
+ *		string		data
+ * 
+ * Return 
+ * 		bool:  true or false
+ * 
+ */
 	bool FindEM(string data) { return List4.search(data); }
+/**
+ * Public: GetEMnodes
+ * 
+ * Description
+ * 		gets the number of nodes that have to checked to to find the 
+ * 		last Email searched
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		int	: the number of nodes checked 
+ * 
+ */
 	int GetEMnodes() { return List4.GetNodes(); }
+/**
+ * Public: FindPH
+ * 
+ * Description
+ * 		Locates the phone number passed in to the function inside the list
+ * 
+ * Param:
+ *		string		data
+ * 
+ * Return 
+ * 		bool:  true or false
+ * 
+ */
 	bool FindPH(string data) { return List5.search(data); }
+/**
+ * Public: GetPHnodes
+ * 
+ * Description
+ * 		gets the number of nodes that have to checked to to find the 
+ * 		last Phone Number searched
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		int	: the number of nodes checked 
+ * 
+ */
 	int GetPHnodes() { return List5.GetNodes(); }
+/**
+ * Public: FindAD
+ * 
+ * Description
+ * 		Locates the address passed in to the function inside the list
+ * 
+ * Param:
+ *		string		data
+ * 
+ * Return 
+ * 		bool:  true or false
+ * 
+ */
 	bool FindAD(string data) { return List6.search(data); }
+/**
+ * Public: GetADnodes
+ * 
+ * Description
+ * 		gets the number of nodes that have to checked to to find the 
+ * 		last Address searched
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		int	: the number of nodes checked 
+ * 
+ */
 	int GetADnodes() { return List6.GetNodes(); }
+/**
+ * Public: FindJT
+ * 
+ * Description
+ * 		Locates the Job Title passed in to the function inside the list
+ * 
+ * Param:
+ *		string		data
+ * 
+ * Return 
+ * 		bool:  true or false
+ * 
+ */
 	bool FindJT(string data) { return List7.search(data); }
+/**
+ * Public: GetJTnodes
+ * 
+ * Description
+ * 		gets the number of nodes that have to checked to to find the 
+ * 		last Job Title searched
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		int	: the number of nodes checked 
+ * 
+ */
 	int GetJTnodes() { return List7.GetNodes(); }
+/**
+ * Public: FindCM
+ * 
+ * Description
+ * 		Locates the Car Model passed in to the function inside the list
+ * 
+ * Param:
+ *		string		data
+ * 
+ * Return 
+ * 		bool:  true or false
+ * 
+ */
 	bool FindCM(string data) { return List8.search(data); }
+/**
+ * Public: GetCMnodes
+ * 
+ * Description
+ * 		gets the number of nodes that have to checked to to find the 
+ * 		last Car Model searched
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		int	: the number of nodes checked 
+ * 
+ */
 	int GetCMnodes() { return List8.GetNodes(); }
-
+/**
+ * Public:	Inserts
+ * 
+ * Description
+ * 		Adds data to the database
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 	void Insert(jsondata data) {
 		List1.insert(data);
 		List2.insert(data);
