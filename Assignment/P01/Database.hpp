@@ -1847,11 +1847,38 @@ public:
 	void dumptree();
 
 };
+/**
+ * Public: dumptree
+ * 
+ * Description
+ * 		Used to call the dodumptree private function
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void PHAVL::dumptree() {
 	cout << "---------------------------------" << endl;
 	cout << "Root:   " << root << "\n";
 	dodumptree(root);
 }
+/**
+ * Public: dodumptree
+ * 
+ * Description
+ * 		used to display all the elements in the tree and all their connected nodes
+ * 
+ * 
+ * Param:
+ *		Node*  current
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void PHAVL::dodumptree(Node* current) {
 	if (current) {
 		cout << "ADD:	" << current << endl
@@ -1866,12 +1893,52 @@ void PHAVL::dodumptree(Node* current) {
 
 	}
 }
+/**
+ * Public: PHAVL
+ * 
+ * Description
+ * 		Constructor
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 PHAVL::PHAVL() {
 	root = 0;
 	nodeschecked = 0;
 }
+/**
+ * Public: PHAVL
+ * 
+ * Description
+ * 		Deconstructor
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 PHAVL :: ~PHAVL() {
 }
+/**
+ * Private: insertNode
+ * 
+ * Description
+ * 		inserts data into the tree
+ * 
+ * Param:
+ *		Node *& 	currrent, 
+*		Node *& 	newNode
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void PHAVL::insertNode(Node*& current, Node*& newNode) {
 	if (current == nullptr) {
 		current = newNode;
@@ -1885,6 +1952,20 @@ void PHAVL::insertNode(Node*& current, Node*& newNode) {
 		insertNode(current->right, newNode);
 	}
 }
+/**
+ * Public: insert
+ * 
+ * Description
+ * 		calls the private insertNode function and compute all the avl values
+ * 		and performs the approipriate rotation
+ * 
+ * Param:
+ *		jsondata	data
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void PHAVL::insert(jsondata data) {
 	Node* newNode;
 	newNode = new Node;
@@ -1895,6 +1976,19 @@ void PHAVL::insert(jsondata data) {
 	insertNode(root, newNode);
 	computeAvlValues(root);
 }
+/**
+ * Public: search
+ * 
+ * Description
+ * 		locates all nodes needed to be checked to locate a piece of data 
+ * 
+ * Param:
+ *		int 	data
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 bool PHAVL::search(string data) {
 	Node* current = root;
 	while (current) {
@@ -1913,6 +2007,19 @@ bool PHAVL::search(string data) {
 	}
 	return false;
 }
+/**
+ * Public: height
+ * 
+ * Description
+ * 		calculates the height of the tree 
+ * 
+ * Param:
+ *		Node* 	current
+ * 
+ * Return 
+ * 		int	 : 	the height of the tree
+ * 
+ */
 int PHAVL::height(Node* current) {
 	int left_height = 0;
 	int right_height = 0;
@@ -1930,9 +2037,36 @@ int PHAVL::height(Node* current) {
 		return 1 + right_height;
 	}
 }
+/**
+ * Private: avlValue
+ * 
+ * Description
+ * 		calculates the avl value of a node 
+ * 
+ * Param:
+ *		Node* 	current
+ * 
+ * Return 
+ * 		int	 : 	the avl value
+ * 
+ */
 int PHAVL::avlValue(Node* current) {
 	return height(current->right) - height(current->left);
 }
+/**
+ * Private: computeAvlValues
+ * 
+ * Description
+ * 		gets the avl values and performs the approipriate
+ * 		rotations neccesary
+ * 
+ * Param:
+ *		Node	*&current
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void PHAVL::computeAvlValues(Node*& current) {
 	if (current) {
 		computeAvlValues(current->left);
@@ -1946,6 +2080,19 @@ void PHAVL::computeAvlValues(Node*& current) {
 		}
 	}
 }
+/**
+ * Private: rotateleft
+ * 
+ * Description
+ * 		performs a left rotation on a given node
+ * 
+ * Param:
+ *		Node	*&Subroot
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void PHAVL::rotateleft(Node*& Subroot) {
 	if (lefftheavy(Subroot->right)) {
 		rotateright(Subroot->right);
@@ -1958,6 +2105,19 @@ void PHAVL::rotateleft(Node*& Subroot) {
 
 	computeAvlValues(Subroot);
 }
+/**
+ * Private: rotateright
+ * 
+ * Description
+ * 		performs a right rotation on a given node
+ * 
+ * Param:
+ *		Node	*&Subroot
+ * 
+ * Return 
+ * 		N/A
+ * 
+ */
 void PHAVL::rotateright(Node*& Subroot) {
 	if (rightheavy(Subroot->left)) {
 		rotateleft(Subroot->left);
@@ -1970,12 +2130,52 @@ void PHAVL::rotateright(Node*& Subroot) {
 
 	computeAvlValues(Subroot);
 }
+/**
+ * Private: leftheavy
+ * 
+ * Description
+ * 		checks if a tree is scewed more the left
+ * 
+ * Param:
+ *		Node	*current
+ * 
+ * Return 
+ * 		bool  : true or false
+ * 
+ */
 bool PHAVL::lefftheavy(Node* current) {
 	return height(current->left) > height(current->right);
 }
+/**
+ * Private: rigthheavy
+ * 
+ * Description
+ * 		checks if a tree is scewed more the right
+ * 
+ * Param:
+ *		Node	*current
+ * 
+ * Return 
+ * 		bool  : true or false
+ * 
+ */
 bool PHAVL::rightheavy(Node* current) {
 	return height(current->right) > height(current->left);
 }
+/**
+ * Public: 	GetNodes
+ * 
+ * Description
+ * 		returns the number of nodes checked to find a node containing
+ * 		the last piece of data searched for
+ * 
+ * Param:
+ *		N/A
+ * 
+ * Return 
+ * 		int  : the number of nodes checked
+ * 
+ */
 int PHAVL::GetNodes() {
 	return nodeschecked;
 }
