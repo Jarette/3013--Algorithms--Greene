@@ -1031,7 +1031,7 @@ int FNAVL::GetNodes() {
  * 
  * Usage: 
  * 		
- * 		FNAVL List;     //creating list object
+ * 		LNAVL List;     //creating list object
  * 		List.insert(data) //adding item to list
  * 		List.search("Hailey") // searching the list of first name Hailey
  * 		List.GetNodes() // the number of nodes checked to finnd the laast thing
@@ -1424,7 +1424,7 @@ int LNAVL::GetNodes() {
  * 
  * Usage: 
  * 		
- * 		FNAVL List;     //creating list object
+ * 		EMAVL List;     //creating list object
  * 		List.insert(data) //adding item to list
  * 		List.search("jarettegreene09@gmail.com") // searching the list of Email jarettegreene09@gmail.com
  * 		List.GetNodes() // the number of nodes checked to finnd the laast thing
@@ -1817,7 +1817,7 @@ int EMAVL::GetNodes() {
  * 
  * Usage: 
  * 		
- * 		FNAVL List;     //creating list object
+ * 		PHAVL List;     //creating list object
  * 		List.insert(data) //adding item to list
  * 		List.search("(940) 7421213") // searching the list of Phone Number (940) 7421213
  * 		List.GetNodes() // the number of nodes checked to finnd the laast thing
@@ -2210,7 +2210,7 @@ int PHAVL::GetNodes() {
  * 
  * Usage: 
  * 		
- * 		FNAVL List;     //creating list object
+ * 		ADAVL List;     //creating list object
  * 		List.insert(data) //adding item to list
  * 		List.search("Comanche Suite") // searching the list of Address Comanche Suite
  * 		List.GetNodes() // the number of nodes checked to finnd the laast thing
@@ -3359,6 +3359,51 @@ bool CMAVL::rightheavy(Node* current) {
 int CMAVL::GetNodes() {
 	return nodeschecked;
 }
+/**
+ * CMAVL
+ * 
+ * Description:
+ * 		Class that contains 8 different AVL trees and allows easy access to add and search for
+ * 		elements in every list based on the data entered
+ * 	
+ * Public Methods:
+ * 					Database (vector<jsondata>data) 
+ * 			bool	FindID(int data) 
+ *			int 	GetIDnodes() 
+ *			bool 	FindFN(string data) 
+ *			int 	GetFNnodes() 
+ * 			bool 	FindLN(string data) 
+ *			int 	GetLNnodes() 
+ *			bool 	FindEM(string data) 
+ *			int 	GetEMnodes()
+ *			bool 	FindPH(string data) 
+ *			int 	GetPHnodes() 
+ *			bool 	FindAD(string data) 
+ *			int 	GetADnodes() 
+ *			bool 	FindJT(string data) 
+ *			int 	GetJTnodes() 
+ *			bool 	FindCM(string data) 
+ *			int 	GetCMnodes()
+ * 
+ * Private: 
+ * 		
+ * 		IDAVL	List1
+ * 		FNAVL	List2
+ * 		LNAVL	List3
+ * 		EMAVL	List4
+ * 		PHAVL	List5
+ * 		ADAVL	List6
+ * 		JTAVL	List7
+ * 		CMAVL	List8
+ * 
+ * Usage: 
+ * 		
+ * 		Database Dbase(data) //loads database
+ * 		Dbase.FindID(123) //locates the ID# 123 inside the database
+ * 		Dbase.GetIDNodes() // displays the amount of nodes needed to find the last thing searched
+ * 		Dbase.Insert(data) //inserts data into the databse
+ * 
+ */
 class Database {
 private:
 	IDAVL List1;
