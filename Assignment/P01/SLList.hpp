@@ -92,18 +92,8 @@ struct ListNode {
  *      bool      FindallEM(string key)
  *      bool      FindallPH(string key)
  *      bool      FindallAD(string key)
- *      bool      FindallLONG(double key)
- *      bool      FindallLAT(double key)
+ *      bool      FindallJT(string key)
  *      bool      FindallCM(string key)
- *      void      RemoveID(int key)
- *      void      RemoveFN(string key)
- *      void      RemoveLN(string key)
- *      void      RemoveEM(string key)
- *      void      RemovePH(string key)
- *      void      RemoveAD(string key)
- *      void      RemoveLONG(double key)
- *      void      RemoveLAT(double key)
- *      void      RemoveCM(string key)
  *      int       GetNodesChecked()
  *
  * Private Methods:
@@ -360,15 +350,15 @@ public:
         return false;
     }
     /**
-     * Public: FindallLONG
+     * Public: FindallJT
      *
      * Description:
-     *     Produces a true or false based on if the Longitude passed
+     *     Produces a true or false based on if the Jobtitle passed
      *     is located in the list and also count all the nodes
      *     that had to be checked to find the node
      *
      * Params:
-     *      double    key
+     *      string    key
      *
      * Returns:
      *      bool   : true or false (1 or 0)
