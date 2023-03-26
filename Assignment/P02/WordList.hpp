@@ -1,25 +1,140 @@
+/*****************************************************************************
+*                    
+*  Author:           Jarette Greene
+*  Email:            jkgreene0406@my.msutexas.edu / jarettegreene09@gmail.com
+*  Label:            P02
+*  Title:            AutoComplete in Linear Time
+*  Course:           CMPS 3013
+*  Semester:         Spring 2023
+* 
+*  Description:
+*        This header file contains a Singly Linked List that will contain strings 
+*		this list will hold all the words found in a dictionary text file containing
+*		over 100,000+ words and will be able traverse the list to display the first
+*		ten words that starts with the a passed in sub string into a function
+* 
+*  Usage:
+*       - create instance of list 
+*		- fill the list with words from file
+*		- use Print_top_ten function to display matches
+* 
+*  Files:           
+*        WordList.hpp		:	 Singly Linked List header file
+*		 termcolor.hpp		:	 termcolor header file
+*****************************************************************************/
 #pragma once
+// neccessary Libraries
 #include <iostream>
 #include <string>
-#include "termcolor.hpp"
+#include "termcolor.hpp"      //used to display colors
 using namespace std;
+/**
+ * WordNode
+ * 
+ * Description:
+ *      Node used to store the words from the dictionary into
+ * 		the singly linked list
+ * 
+ * Public Methods:
+ *            WordNode(string data)  // overloaded constructor
+ * 
+ * Private Methods:
+ *    
+ *       N/A
+ * 
+ * Usage: 
+ * 
+ *     WordNode *temp = new Node(d) //creates and initilizes a new node 
+ *      
+ */
 struct WordNode {
 	string word;
 	WordNode* next;
+/**
+ * Public: WordNode
+ * 
+ * Description:
+ *     Constructor that recieves a string creates a new node 
+ * 
+ * Params:
+ *      string	data
+ * 
+ * Returns:
+ *      N/A
+*/
 	WordNode(string data) {
 		next = nullptr;
 		word = data;
 	}
 };
+/**
+ * WordsLL
+ * 
+ * Description:
+ *      This is a Singly Linked List that will store a list of words that will be 
+ * 		passed in from a file. This linked list will allow the user to print all the 
+ * 		words stored in the list, remove words from the list, access data through
+ * 		the use of indexes and display the first ten words in the list that begins with
+ * 		a passed in substring.
+ * 
+ * Public Methods:   
+ * 					WordsLL()
+ * 		void		Print()
+ * 		void		Backsert(string word)
+ * 		void		Remove(string data)
+ * 		int 		GetSize();
+ * 		string&		operator[](int index)
+ * 		void		Print_top_ten(string sub)
+ * 
+ * Private Methods:
+ *      WordNode*	head;
+ * 		WordNode*	tail;
+ * 
+ * Usage: 
+ * 
+ *      WordsLL	List1;		//create instance of list
+ * 		List1.Backsert("Alleyway");		//Insert word into list
+ * 		List1.Backsert("Ally");
+ * 		List1.Remove("Alleyway");  // removes alleyway from the list
+ * 		List1.Print();		//prints the entire list
+ * 		cout << List1[0];	//displays the first item in the list
+ * 		int size = List1.Getsize();	//gets the size if the list
+ * 		List1.Print_top_ten("Al");  //displays the first 10 words in the list that begin with "Al"
+ *      
+ */
 class WordsLL {
 private:
-	WordNode* head;
-	WordNode* tail;
+	WordNode* head;		//the head of the list
+	WordNode* tail;		//the tail of the list
 public:
+/**
+ * Public: WordsLL
+ * 
+ * Description:
+ *     Default constructor that sets head and tail nodes to NULL 
+ * 
+ * Params:
+ *      N/A
+ * 
+ * Returns:
+ *      N/A
+*/
 	WordsLL() {
 		head = nullptr;
 		tail = nullptr;
 	}
+/**
+ * Public: Print
+ * 
+ * Description:
+ *     Displays all words stored in the list
+ * 
+ * Params:
+ *      N/A
+ * 
+ * Returns:
+ *      N/A
+*/
 	void Print() {
 		WordNode* traverse = head;
 		while (traverse) {
@@ -27,6 +142,18 @@ public:
 			traverse = traverse->next;
 		}
 	}
+/**
+ * Public: Backsert
+ * 
+ * Description:
+ *     This method inserts word into the back of the linked list 
+ * 
+ * Params:
+ *      string 		word
+ * 
+ * Returns:
+ *      N/A
+*/
 	void Backsert(string word) {
 		WordNode* temp = new WordNode(word);
 		if (head == nullptr) {
@@ -39,6 +166,18 @@ public:
 			temp->next = nullptr;
 		}
 	}
+/**
+ * Public: Remove
+ * 
+ * Description:
+ *     This method will remove a passed word from the linked list
+ * 
+ * Params:
+ *      string 		word
+ * 
+ * Returns:
+ *      N/A
+*/
 	void Remove(string word) {
 		if (head->word == word) {
 			WordNode* temp = head;
@@ -65,6 +204,18 @@ public:
 			delete temp;
 		}
 	}
+/**
+ * Public: Getsize
+ * 
+ * Description:
+ *     This method will return the number of items stored in the list
+ * 
+ * Params:
+ *      N/A
+ * 
+ * Returns:
+ *      int		: 	the number of items in the list 
+*/
   int Getsize(){
     int count = 0;
     WordNode* traverse = head;
@@ -74,6 +225,19 @@ public:
     }
     return count;
   }
+/**
+ * Public: operator[]
+ * 
+ * Description:
+ *     overloaded operator that allows you to access data stored in the 
+ * 		list using indexing similar to an array 
+ * 
+ * Params:
+ *      int 	index
+ * 
+ * Returns:
+ *      string&		: 	The address of where the string is stored  
+*/
 string& operator[](int index){
   WordNode* traverse = head;
   if(index > Getsize()){
@@ -87,6 +251,21 @@ string& operator[](int index){
     return traverse->word;
   }
 }
+/**
+ * Public: Print_top_ten
+ * 
+ * Description:
+ *     This method will traverse the list looking for the first ten 
+ * 		words that start with the substring passed into the function
+ * 		and display those ten words with the substring section of the
+ * 		word will be a different color
+ * 
+ * Params:
+ *      string	 	sub
+ * 
+ * Returns:
+ *     	N/A 
+*/
 void Print_top_ten(string sub){
   size_t found;
   int count =0;
