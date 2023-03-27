@@ -136,7 +136,7 @@ public:
  *      N/A
 */
 	void Print() {
-		WordNode* traverse = head;
+		WordNode* traverse = head;   //setting traverse to the be the head of the list
 		while (traverse) {
 			cout << traverse->word << " ";
 			traverse = traverse->next;
@@ -155,7 +155,7 @@ public:
  *      N/A
 */
 	void Backsert(string word) {
-		WordNode* temp = new WordNode(word);
+		WordNode* temp = new WordNode(word); // creating new node with word
 		if (head == nullptr) {
 			head = temp;
 			tail = temp;
@@ -185,11 +185,11 @@ public:
 			delete temp;
 		}
 		else if (tail->word == word) {
-			WordNode* traverse = head;
+			WordNode* traverse = head;  //setting traverse node as the head of list
 			while (traverse->next->next != nullptr) {
 				traverse = traverse->next;
 			}
-			WordNode* temp = tail;
+			WordNode* temp = tail; // temperary node pointing to tail of list
 			tail = traverse;
 			tail->next = nullptr;
 			delete temp;
@@ -217,8 +217,8 @@ public:
  *      int		: 	the number of items in the list 
 */
   int Getsize(){
-    int count = 0;
-    WordNode* traverse = head;
+    int count = 0;			// the number of words in the list
+    WordNode* traverse = head; // traverse pointing to head of the list
     while(traverse){
       count++;
       traverse = traverse->next;
@@ -239,7 +239,7 @@ public:
  *      string&		: 	The address of where the string is stored  
 */
 string& operator[](int index){
-  WordNode* traverse = head;
+  WordNode* traverse = head; // pointer pointing to head of the list
   if(index > Getsize()){
     cout << "invalid index";
     return;
@@ -267,9 +267,9 @@ string& operator[](int index){
  *     	N/A 
 */
 void Print_top_ten(string sub){
-  size_t found;
-  int count =0;
-  WordNode* traverse = head;
+  size_t found;		//holds the position of where the substring is found in the list
+  int count =0;		// tracking the amount of words found
+  WordNode* traverse = head;	// pointer pointing to head of list
   while (traverse && count < 10){
     found = traverse->word.find(sub);
     if(found!=string::npos){
