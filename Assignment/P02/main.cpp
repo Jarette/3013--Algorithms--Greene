@@ -132,7 +132,7 @@ int main() {
       cout << termcolor::bright_yellow << Matches.Getsize() << " words " << termcolor::reset;
       cout << "found in " << termcolor::bright_yellow << T.Seconds() << " seconds." << termcolor::reset << endl << endl;
       Matches.Print_top_ten(word);
-      cout << endl;
+      cout << endl << endl;
     }
   }
 }
