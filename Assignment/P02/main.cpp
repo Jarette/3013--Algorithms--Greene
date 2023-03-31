@@ -70,7 +70,8 @@ WordsLL LoadWords() {
  * 
  * Description:
  *     This function finds all words in a list that contains
- *    a substring and saves it to a new list.
+ *    a substring and saves it to a new list and displays the first
+ *    10 matches found
  * 
  * Params:
  *      WordsLL   WordList
@@ -80,58 +81,68 @@ WordsLL LoadWords() {
  *     WordsLL    :   the list containing all the words containing the substring  
 */
 WordsLL FindWords(WordsLL WordList, string sub) {
-  WordsLL match;
-  size_t found;
+  WordsLL match; //list containing all matches 
+  size_t found;  //position of substring in the word
+  int count = 0; //count to find the first ten matches
   for (int i = 0; i < WordList.Getsize(); i++) {
-    found = WordList[i].find(sub);
-    if (found != string::npos) {
-        match.Backsert(WordList[i]);
+    found = WordList[i].find(sub); //loactes position of substring in word
+    if (found == 0) {
+      match.Backsert(WordList[i]); //adds to the matches list
+      if (count < 10) {
+        // displaying the first 10 matches and highlighting the substring within the matched word
+        for (int j = 0; j < WordList[i].length(); j++) {
+          if(WordList[i][j] == sub[j]&&j<sub.length()){
+            cout << termcolor::bright_red << WordList[i][j] << termcolor::reset;
+          }else{
+            cout << termcolor::red << WordList[i][j] << termcolor::reset;
+          }
+        }
+        cout << " ";
+        count++;
+      }
     }
   }
   return match;
 }
 
 int main() {
-  char k;       // the character entered by the user
-  string word = "";   //the substring being searched
-  WordsLL Words;    // the list containing all the words 
-  WordsLL Matches;  //list containing all the words containing the substrng 
-  Timer T;          //timer object that allows you to track effieciency
-
-  // loading the list up with all the words from the input file
+  char k;  // character entered by user 
+  string word = ""; // the substring being searched for
+  WordsLL Words;  // Linked list containing all the words
+  WordsLL Matches; // linked list containing matches 
+  Timer T; // Timer variable to check how long a function takes to drun 
+  double Seconds; // the time
   Words = LoadWords();
-
-  //asking the user to start entering the word they would like to search for
-  cout << "Type the word you would like to search (letter by letter). Type capital Z to quit." << endl;
-  // while statement checking if the user enters a capital Z and if so ends program 
-  while ((k = getch()) != 'Z') {
+  cout << "Type the word you would like to search (letter by letter) the search begins after the first three charcters are entered. Type capital Z to quit."
+       << endl;
+  while ((k = getch()) != 'Z') { // accepting user input
     T.Start();
-    // collects the characters typed by the user and concatinates them into one string
     if ((int)k == 127) {
       if (word.size() > 0) {
         word = word.substr(0, word.size() - 1);
       }
     } else {
-      if (!isalpha(k)) {
+      if (!isalpha(k)) { // making sure the character entered is a letter
         cout << "Letter only!" << endl;
         continue;
       }
       if ((int)k < 97) {
         k += 32;
       }
-      word += k;
+      word += k; // putting all the user entered characters into a string
     }
-    // places all words that contain the substring created by the user into a list
-    Matches = FindWords(Words, word);
-    if ((int)k != 32) {
+    // displaying the user entered string 
+    cout << termcolor::blue << word << termcolor::reset << endl << endl;
+    if (word.length() >= 3) { //making sure the substring is atleast 3 characters long
+      Matches = FindWords(Words, word); // finding and printing matches
+      cout << endl << endl;
       T.End();
-    // displaying all required data;
-      cout << endl;
-      cout << termcolor::blue << word << termcolor::reset << endl;
-      cout << endl;
-      cout << termcolor::bright_yellow << Matches.Getsize() << " words " << termcolor::reset;
-      cout << "found in " << termcolor::bright_yellow << T.Seconds() << " seconds." << termcolor::reset << endl << endl;
-      Matches.Print_top_ten(word);
+      // displaying total matches
+      cout << termcolor::bright_yellow << Matches.Getsize() << termcolor::reset;
+      cout << " Matches Found in ";
+      // displaying the time it took to find all those matches 
+      cout << termcolor::bright_yellow << T.Seconds() << termcolor::reset;
+      cout << " Seconds";
       cout << endl << endl;
     }
   }

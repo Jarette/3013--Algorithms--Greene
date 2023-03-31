@@ -89,6 +89,7 @@ struct WordNode {
  * Private Methods:
  *      WordNode*	head;
  * 		WordNode*	tail;
+ * 		int 		size = 0;
  * 
  * Usage: 
  * 
@@ -99,13 +100,14 @@ struct WordNode {
  * 		List1.Print();		//prints the entire list
  * 		cout << List1[0];	//displays the first item in the list
  * 		int size = List1.Getsize();	//gets the size if the list
- * 		List1.Print_top_ten("Al");  //displays the first 10 words in the list that begin with "Al"
+ * 
  *      
  */
 class WordsLL {
 private:
 	WordNode* head;		//the head of the list
 	WordNode* tail;		//the tail of the list
+	int size = 0;		//the amount of items in the list
 public:
 /**
  * Public: WordsLL
@@ -135,10 +137,12 @@ public:
  * Returns:
  *      N/A
 */
-	void Print() {
-		WordNode* traverse = head;   //setting traverse to the be the head of the list
+void Print() {
+	WordNode* traverse = head; // starting traverse at the head of the list
+    int count = 1; // the know the items positon in the list
 		while (traverse) {
-			cout << traverse->word << " ";
+			cout << count << ": " << traverse->word << endl;
+      		count++;
 			traverse = traverse->next;
 		}
 	}
@@ -159,11 +163,13 @@ public:
 		if (head == nullptr) {
 			head = temp;
 			tail = temp;
+			size++;  // incrementing count
 		}
 		else {
 			tail->next = temp;
 			tail = temp;
 			temp->next = nullptr;
+			size++; //incrementing count
 		}
 	}
 /**
@@ -217,13 +223,7 @@ public:
  *      int		: 	the number of items in the list 
 */
   int Getsize(){
-    int count = 0;			// the number of words in the list
-    WordNode* traverse = head; // traverse pointing to head of the list
-    while(traverse){
-      count++;
-      traverse = traverse->next;
-    }
-    return count;
+    return size;
   }
 /**
  * Public: operator[]
@@ -251,41 +251,4 @@ string& operator[](int index){
     return traverse->word;
   }
 }
-/**
- * Public: Print_top_ten
- * 
- * Description:
- *     This method will traverse the list looking for the first ten 
- * 		words that start with the substring passed into the function
- * 		and display those ten words with the substring section of the
- * 		word will be a different color
- * 
- * Params:
- *      string	 	sub
- * 
- * Returns:
- *     	N/A 
-*/
-void Print_top_ten(string sub){
-  size_t found;		//holds the position of where the substring is found in the list
-  int count =0;		// tracking the amount of words found
-  WordNode* traverse = head;	// pointer pointing to head of list
-  while (traverse && count < 10){
-    found = traverse->word.find(sub);
-    if(found!=string::npos){
-      if(found == 0){
-        for(int i = 0; i < traverse->word.length();i++){
-          if(traverse->word[i]==sub[i]&& i < sub.length()){
-            cout << termcolor::bright_red << traverse->word[i] << termcolor::reset;
-          }else{
-            cout << termcolor::red << traverse->word[i] << termcolor::reset;
-          }
-        }
-        cout << " ";
-        count++;
-      }
-    }
-    traverse = traverse->next;
-      }
-}    
 };
