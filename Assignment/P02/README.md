@@ -27,7 +27,7 @@
   - the program displays all words that starts with the string entered by user
   - Use backspace to change the string entered by user
 
-- Example Command:
+### Example Command:
 
       // accepting the user input and concatinating into a larger string 
       while ((k = getch()) != 'Z') { // accepting user input
