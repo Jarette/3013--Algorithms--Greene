@@ -1,3 +1,27 @@
+/*****************************************************************************
+*                    
+*  Author:           Jarette Greene
+*  Email:            jkgreene0406@my.msutexas.edu / jarettegreene09@gmail.com
+*  Label:            P02
+*  Title:            AutoComplete in Linear Time
+*  Course:           CMPS 3013
+*  Semester:         Spring 2023
+* 
+*  Description:
+*        This header file contains a Singly Linked List that will contain strings 
+*		this list will hold all the words found in a dictionary text file containing
+*		over 100,000+ words and will be able traverse the list to display the first
+*		ten words that starts with the a passed in sub string into a function
+* 
+*  Usage:
+*       - create instance of list 
+*		- fill the list with words from file
+*		- use Print_top_ten function to display matches
+* 
+*  Files:           
+*        WordList.hpp		:	 Singly Linked List header file
+*		 termcolor.hpp		:	 termcolor header file
+*****************************************************************************/
 #include "TrieTree.hpp"
 #include "json.hpp"
 #include "mygetch.hpp"

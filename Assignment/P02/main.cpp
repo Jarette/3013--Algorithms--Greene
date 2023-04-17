@@ -8,19 +8,24 @@
 *  Semester:         Spring 2023
 * 
 *  Description:
-*        This header file contains a Singly Linked List that will contain strings 
-*		this list will hold all the words found in a dictionary text file containing
-*		over 100,000+ words and will be able traverse the list to display the first
-*		ten words that starts with the a passed in sub string into a function
+*     This Program will perform a string look up on a dictionary containing 100,000 words.
+*     This is done by using a singly linked list to store every string then with the use of 
+*     mygetch to read the inputs in real time. Then after the first 3 characters are entered
+*     the program searches every word in the list to locate all words that start with the string 
+*     (Prefix) created by the user and displays the first ten words that begin with the prefix 
+*     and the amount of matches found and the time it took the program to find these matches
 * 
 *  Usage:
-*       - create instance of list 
-*		- fill the list with words from file
-*		- use Print_top_ten function to display matches
+*    - Hit run
+*    - enter a character (ONLY LETTER CHARACTERS!!)
+-    - enter 3 characters and wait for program to display result of searcg
 * 
 *  Files:           
 *        WordList.hpp		:	 Singly Linked List header file
-*		 termcolor.hpp		:	 termcolor header file
+*		     termcolor.hpp	:	 termcolor header file
+*        timer.hpp      :  timer header file
+*        mygetch.hpp    :  Getch header file
+*        main.cpp       :  main driver
 *****************************************************************************/
 #include "WordList.hpp"
 #include "mygetch.hpp"
