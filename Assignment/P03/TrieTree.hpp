@@ -1,3 +1,33 @@
+/*****************************************************************************
+*                    
+*  Author:           Jarette Greene
+*  Email:            jkgreene0406@my.msutexas.edu / jarettegreene09@gmail.com
+*  Label:            P03
+*  Title:            Processing in Trie Tree Time
+*  Course:           CMPS 3013
+*  Semester:         Spring 2023
+* 
+*  Description:
+*     This Header file contains the implementation for a Trie Tree that is used
+*     to create an auto complete search. This tree will take a word and store 
+*     it into the tree character by charcater and marking where there is the end 
+*     of a word. This Trie Tree will then allow for the user to enter a substring 
+*     (Prefix) and then the tree would search for all words that begin with the prefix
+*     and display the first ten matches and the total number of matches 
+*    
+*  Usage:
+*     - Declare Trie Tree Object     
+*     - pass a string into the insert method to fill the tree 
+*     - pass substring into Matches method to search the tree for all strings that begin with the substring
+* 
+*  Files:           
+*        TrieTree.hpp		:	 Singly Linked List header file
+*		     termcolor.hpp	:	 termcolor header file
+*        timer.hpp      :  timer header file
+*        mygetch.hpp    :  Getch header file
+*        json.hpp       :  Json header file
+*        main.cpp       :  main driver
+*****************************************************************************/
 #include "termcolor.hpp"
 #include <iostream>
 #include <map>
@@ -27,8 +57,7 @@ struct TrieNode {
 class Trie {
 private:
   TrieNode *root;
-  vector<string> matches;
-  void Trav(TrieNode *root, string sub, int &count, int trav_count) {
+  void Trav(TrieNode *root, string sub, int &count, int trav_count, string temp) {
     if (root == nullptr) {
       return;
     }
@@ -39,12 +68,19 @@ private:
     }
     if (root->end_of_word) {
       if (count < 10) {
-        matches.push_back(sub);
+        for(int i = 0; i < sub.length();i++){
+         if(sub[i] == temp[i] && i < temp.length()){
+           cout << termcolor :: bright_red << sub[i] << termcolor :: reset;
+         } else {
+           cout << termcolor :: red << sub[i] << termcolor :: reset;
+         }
+        }
+        cout << " ";
       }
       count++;
     }
     for (int i = 'a'; i <= 'z'; i++) {
-      Trav(root->children[(char)i], sub, count, trav_count);
+      Trav(root->children[(char)i], sub, count, trav_count,temp);
     }
   }
 public:
@@ -63,7 +99,7 @@ public:
   int Matches(string sub) {
     int count = 0;
     int trav_count = 0;
-    matches.clear();
+    string temp = sub;
    TrieNode *traverse = root;
     for (int i = 0; i < sub.length(); i++) {
       if (!traverse->children[sub[i]]) {
@@ -71,20 +107,7 @@ public:
       }
       traverse = traverse->children[sub[i]];
     }
-    Trav(traverse, sub, count, trav_count);
+    Trav(traverse, sub, count, trav_count, temp);
     return count;
-  }
-  void Print_matches(string sub) {
-    for (int i = 0; i < matches.size(); i++) {
-      for(int j = 0; j < matches[i].length(); j++){
-        if(matches[i][j] == sub[j]&&j<sub.length()){
-          cout << termcolor::bright_red << matches[i][j] << termcolor::reset;
-        }else{
-          cout << termcolor::red << matches[i][j] << termcolor::reset;
-        }
-      }
-      cout << " ";
-    }
-    cout << endl;
   }
 };

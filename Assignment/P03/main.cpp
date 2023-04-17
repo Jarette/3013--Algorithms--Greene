@@ -19,7 +19,7 @@
 *  Usage:
 *    - Hit run
 *    - enter a character (ONLY LETTER CHARACTERS!!)
-*    - enter 3 characters and wait for program to display result of searcg
+*    - enter 3 characters and wait for program to display result of searc
 * 
 *  Files:           
 *        TrieTree.hpp		:	 Singly Linked List header file
@@ -99,12 +99,11 @@ int main() {
     // displaying the user entered string 
     cout << termcolor::blue << word << termcolor::reset << endl << endl;
     if (word.length() >= 3) {
-      // finding all the words that start with the word the user 
-      matches = Words.Matches(word);
+      // finding all the words that start with the word the user and displaying the first ten
+      matches = Words.Matches(word); 
       T.End(); // ending timer
       nano = T.NanoSeconds(); // getting the timer results in nanoseconds
       cout << endl;
-      Words.Print_matches(word); // displaying all matches 
       // displaying the number of matches 
       cout << termcolor::yellow << matches << termcolor::reset;
       cout << " Matches Found in ";
