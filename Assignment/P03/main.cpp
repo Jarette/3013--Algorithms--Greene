@@ -79,7 +79,7 @@ int main() {
           "search begins after the first three charcters are entered. Type "
           "capital Z to quit."
        << endl;
-  // getting the user endered character
+  // getting the user entered character
   while ((k = getch()) != 'Z') {
     T.Start(); // starting timer
     if ((int)k == 127) {
