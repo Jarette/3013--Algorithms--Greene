@@ -18,6 +18,7 @@
 |   4   | [termcolor.hpp](https://github.com/Jarette/3013--Algorithms--Greene/blob/main/Assignment/P02/termcolor.hpp)| allowing the console to display color|
 |   5   | [Timer.hpp](https://github.com/Jarette/3013--Algorithms--Greene/blob/main/Assignment/P02/timer.hpp)| Timer class used to track the time used to run functions|
 |   6   | [dictionary.txt](https://github.com/Jarette/3013--Algorithms--Greene/blob/main/Assignment/P02/dictionary.txt)|text file containing 100,000+ words|
+|   7   | [Output.pdf](https://github.com/Jarette/3013--Algorithms--Greene/blob/main/Assignment/P02/Output.pdf)|Output screen dump|
 
 
 ### Instructions

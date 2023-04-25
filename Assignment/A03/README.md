@@ -13,7 +13,7 @@
 
 |   #   | File             | Description                                        |
 | :---: | ---------------  | -------------------------------------------------- |
-|   1   | [Main.cpp](https://github.com/Jarette/3013--Algorithms--Greene/blob/main/Assignment/A03/main.cpp)| Main driver of my project that launches game.      |
+|   1   | [Main.cpp](https://github.com/Jarette/3013--Algorithms--Greene/blob/main/Assignment/A03/main.cpp)| Main driver |
 
 
 ### Instructions
